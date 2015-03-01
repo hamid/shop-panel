@@ -1,0 +1,15 @@
+{
+    "name": "cmsmelli/shop",
+    "description": "shop panel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hamid reza salimian",
+            "email": "hamid@salimian.me"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+		"slim/slim": "2.*"
+	}
+}
