@@ -1,5 +1,9 @@
 {  
-    "COLOR" : "Color",
+    "HEADER" :{
+        "LINK1":"پنل مدیریت",
+        "LINK1":"پنل فروشگاهی",
+        "LINK1":''
+    },
     "HELLO" : "Helloooooooo",
     "HELLO_WORLD" : " Hello World!"
 }

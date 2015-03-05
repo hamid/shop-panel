@@ -1,0 +1,8 @@
+body.ltr {
+  direction: ltr;
+}
+body.rtl {
+  direction: rtl;
+}
+
+/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */

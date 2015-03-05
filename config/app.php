@@ -27,6 +27,7 @@ $app_config = array(
             return true;
           },
                   
+                  
         /*
 	|--------------------------------------------------------------------------
 	| Application language
@@ -37,7 +38,33 @@ $app_config = array(
 	| the value shuld be locale ID(i18n)
         |
 	*/
-          'language' => 'en-us'
+        'language' => 'en-us',
+                  
+                  
+        /*
+	|--------------------------------------------------------------------------
+	| Application direction
+	|--------------------------------------------------------------------------
+	|
+	| direction of text and box of panel. it depends on your language
+        | it could be `ltr` => Left  To Right
+        | or          `rtl` => Right To Left
+        |
+	*/
+        'direction' => 'ltr',
+                  
+                       
+        /*
+	|--------------------------------------------------------------------------
+	| Application template
+	|--------------------------------------------------------------------------
+	|
+        | name of panel template , its directory in /frontend/template,
+        | it contains css and less files of template, you could build your own
+        | template by cloning the base template and change the below key
+        |
+	*/
+          'template' => 'base'
                   
         
 );

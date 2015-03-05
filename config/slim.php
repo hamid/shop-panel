@@ -82,7 +82,7 @@ $slim_config = array(
     | view directly and use its setTemplatesDirectory() method.
     |
     */        
-    'templates.path' =>'./frontend'
+    'templates.path' =>'.\frontend'
         
 );
 
