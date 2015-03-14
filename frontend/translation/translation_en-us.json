@@ -1,5 +1,22 @@
 {  
-    "LINK1" : "LINK1",
-    "LINK2" : "LINK2",
-    "HELLO_WORLD" : " Hello World!"
+    "HEADER" :{
+        "LINK1":"Top Link 1",
+        "LINK2":"Top Link 2",
+        "LINK3":"Top Link 3"
+    },
+    "SIDEBAR":{
+        "STATICTIS":"Statictis",
+        "PRODUCTS":"products",
+        "SETTINGS":"Settings",
+        "LEARN":"Learn"
+    },
+    "PRODUCT":{
+        "ADD":"Add",
+        "SET_TYPE":" Set Type",
+        "SHOW":"Show",
+        "ADD_CAT":" Add Cat ",
+        "CAT_EMPTY_MESSAGE":"There is no Category ",
+        "ADD_PRODUCT":" Add Product",
+        "PRODUCT_EMPTY_MESSAGE":" There is no Product in this Category "
+    }
 }

@@ -38,7 +38,7 @@ $app_config = array(
 	| the value shuld be locale ID(i18n)
         |
 	*/
-        'language' => 'en-us',
+          'language' => 'en-us',
                   
                   
         /*
@@ -51,7 +51,7 @@ $app_config = array(
         | or          `rtl` => Right To Left
         |
 	*/
-        'direction' => 'ltr',
+          'direction' => 'ltr',
                   
                        
         /*

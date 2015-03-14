@@ -1,0 +1,28 @@
+a{
+    text-decoration: none;
+    color: @color-primary;
+}
+
+.main-content
+{
+}
+
+/*-- font size Class generator --*/
+.generate-font-size(30,16);
+.generate-font-size(@n, @i: 18) when (@i =< @n) {
+  .f-size-@{i} {
+    font-size: 1px * @i !important;
+  } 
+  .generate-font-size(@n, (@i + 1));
+}
+
+/*-- animation delay --*/
+.generate-delay(20,1);
+.generate-delay(@n, @i: 18) when (@i =< @n) {
+  .delay-@{i} { 
+    animation-delay: 100ms * @i;
+    -webkit-animation-delay: 110ms * @i;
+  } 
+  .generate-delay(@n, (@i + 1));
+}
+

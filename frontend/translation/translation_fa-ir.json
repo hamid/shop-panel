@@ -1,9 +1,25 @@
 {  
     "HEADER" :{
         "LINK1":"پنل مدیریت",
-        "LINK1":"پنل فروشگاهی",
-        "LINK1":''
+        "LINK2":"پنل فروشگاهی",
+        "LINK3":"پنل ایمیل"
     },
+    "SIDEBAR":{
+        "STATICTIS":"آمار فروش",
+        "PRODUCTS":"محصولات",
+        "SETTINGS":"تنظیمات",
+        "LEARN":"آموزش"
+    },
+    "PRODUCT":{
+        "ADD":"ایجاد",
+        "SET_TYPE":"تعیین نوع",
+        "SHOW":"نمایش",
+        "ADD_CAT":"ایجاد دسته",
+        "CAT_EMPTY_MESSAGE":"دسته ای وجود ندارید ",
+        "ADD_PRODUCT":"ایجاد محصول",
+        "PRODUCT_EMPTY_MESSAGE":"محصولی ای وجود ندارید "
+    },
+    
     "HELLO" : "Helloooooooo",
     "HELLO_WORLD" : " Hello World!"
 }

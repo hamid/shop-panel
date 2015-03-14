@@ -1,0 +1,139 @@
+@box-border-color       : @color-gray-1;
+@link-color             : @color-primary;
+@link-hover-color       : @color-primary;
+@text-color             : @color-gray-3;
+@item-hover-color       : lighten(@color-gray-1,7%);
+@item-active-color      : @color-primary;
+
+
+
+
+.product{
+
+.box{
+    
+    min-width       :300px;
+    color           :@text-color ;
+    border-color    :@box-border-color;
+    border-style    :solid;
+    transition      :all ease-in 250ms;
+    
+    .header{
+        color   :@link-color;
+        .action-link{
+            padding     :15px;
+            cursor      :pointer;
+            text-align  :center;
+            transition  :all ease-in 250ms;
+            
+            &:hover{
+                background-color: #fafafa;
+            }
+            
+            .icon{
+                font-size       :18px;
+                vertical-align  :middle;
+            }
+            
+        }
+    }
+    .search-box{
+        position:relative;
+        input[type="text"]
+        {
+            border:1px solid @box-border-color;
+            padding:5px;
+            color :@text-color;
+            padding: 1px 5px;
+            width: 90%;
+            margin: 0px 5%;
+            font-size:12px;
+            &:focus{
+                border-bottom:1px solid @item-active-color;
+            }
+        }
+        .icon{
+            position:absolute;
+            top:4px;
+            color:lighten(@text-color,10%);
+        }
+    }
+    
+    
+    .list{
+        ul{list-style:none;padding:0px 4px}
+        .item{
+            margin-top      :2px;
+            padding         :3px;
+            transition      :all ease-in 100ms;
+            border-radius   :2px;
+            overflow        :hidden;
+            
+            &:hover{
+                background:@item-hover-color;
+                & .toolbar{
+                    transform   : translateX(0px) !important;
+                    opacity     : .5;
+                }
+            }
+            
+            &.selected{
+                 background:@item-active-color;
+                 a,.toolbar span:hover{color: #fff;}
+            }
+            
+            .toolbar{
+                display     :inline-block;
+                transition  :all ease-out 120ms;
+                opacity: 0;
+                font-size   : 16px;
+                span{
+                    vertical-align: middle;
+                    &:hover{
+                        color:@item-active-color ;
+                    }
+                }
+            }
+            
+            
+            a{
+                display         :block;
+                vertical-align  :sub;
+                color           :@text-color;
+                .icon{
+                    font-size       :22px;
+                    margin          :0px 13px;
+                    &.pshop-folder-open-o
+                    {
+                        margin  :0px 10px;
+                    }
+                    &.pshop-folder2{
+                        font-size   :20px;
+                    }
+                }   
+            }
+            
+            
+            
+        }
+    }// End List
+    
+    .empty-message{
+            text-align  : center;
+            margin      : 17% 0px;
+            a{
+                border          : 1px solid transparent;
+                border-radius   : 2px;
+                padding     : 7px 15px;
+                transition  : all ease-in 200ms;
+                &:hover{border: 1px solid @item-active-color;}    
+            }
+            span{vertical-align: middle;font-size: 16px;}
+    }
+    
+    
+}// End box
+
+
+
+}

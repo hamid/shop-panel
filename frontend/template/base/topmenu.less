@@ -1,0 +1,41 @@
+
+@topmenu-backGround-color   : #fff;
+@topmenu-text-color         : @color-gray-2;
+@topmenu-text-color-hover   : @color-primary;
+@topmenu-border-color       : @color-gray-1;
+
+
+
+.top-menu{
+    color           :@topmenu-text-color ;
+    border-bottom   :1px solid @topmenu-border-color ; 
+    font-size: 14px;
+    height:50px; 
+    
+    .item{
+        position        :relative;
+        top             :1px;
+        padding         :11px 16px;
+        margin          :0;
+        border-bottom   :1px solid transparent;
+        transition  :all ease-in 250ms;
+        
+        a{color: inherit}
+        
+        .icon{
+            vertical-align: middle;
+            font-size: 20px;
+            padding: 5px;
+        }
+        
+        &.active,&:hover
+        {
+            color:@topmenu-text-color-hover;
+            border-bottom   :1px solid @topmenu-text-color-hover;
+        }
+    }
+    
+    
+}
+
+

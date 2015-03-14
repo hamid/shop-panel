@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="mainApp" >
-<head>
-    
-  <base href="frontend/" target="_blank">  
+<head> 
   
+  <base href="./frontend/" target="_blank">   
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>E-Shop</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
   
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
@@ -23,29 +24,34 @@
   <link rel="stylesheet" href="template/<?php echo($app_config['template'].'/lang/'.$app_config['language']); ?>/style.css">
   
 </head>
-<body class=" <?php echo($app_config['direction']); ?> ">
+<body class=" <?php echo($app_config['direction']); ?> " layout="row">
     
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
   
-  
-    <!--Header-->
-    <?php include(__DIR__.'/header.html'); ?>
+      
+      <!--Sidebar-->
+      <div class="sidebar animated fadeInSide" flex="5">
+        <?php include(__DIR__.'/sidebar.html'); ?>
+      </div>
+      
+      <!--TopMenu-->
+      <div class="center-box" flex layout="column">
+        <?php include(__DIR__.'/topMenu.html'); ?>
+          
+      <!--Main Box-->
+        <div  layout="column" flex ng-view></div>
+        
+      </div>
+      
+      
     
-    <!--Sidebar-->
-    <?php include(__DIR__.'/sidebar.html'); ?>
-    
-    <!--Main Box-->
-    <div ng-view>
-
-    </div>
-    
+      
     <!--Footer-->
     <?php include(__DIR__.'/footer.html'); ?>
 
-  
   
     
     
@@ -78,7 +84,7 @@
     <!-- Controllers -->
     <script  src="controllers/statistics.js"></script>
     <script  src="controllers/products.js"></script>
-    <script  src="controllers/header.js"></script>
+    <script  src="controllers/topMenu.js"></script>
     <script  src="controllers/sidebar.js"></script>
   
 
