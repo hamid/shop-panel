@@ -3,6 +3,8 @@
 var mainApp     =   angular.module('mainApp', [
     'TranslateService',
     'ngRoute',
+    'ngMaterial',
+    'ui.sortable'
 ])
 .config(['$routeProvider',
   function($routeProvider) {

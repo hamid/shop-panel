@@ -1,6 +1,73 @@
 <!-- Products Page : contain Tree of all cat s and products --> 
 <div class="product" layout="row" flex>
     
+<<<<<<< HEAD
+    <section ng-repeat="box in boxList" class="box" flex="15">
+        
+        <!----- [ Header ] ----->
+        <div class="header" layout="row" layout-align="space-between center">
+            
+            <md-button flex="33" class="action-link" ng-click="addClick(box,$event)" >
+                <span class="icon pshop-plus"></span>
+                <span class="caption"> {{Translate.PRODUCT.ADD}} </span>
+                <md-tooltip class="right">ADD</md-tooltip>
+            </md-button>
+            
+            <md-button flex="33" class="action-link" >
+                <span class="icon pshop-cart f-size-16"></span>
+                <span class="caption"> {{Translate.PRODUCT.SET_TYPE}} </span>
+            </md-button>
+            
+            <md-button flex="33" class="action-link" >
+                <span class="icon pshop-grid f-size-25"></span>
+                <span class="caption"> {{Translate.PRODUCT.SHOW}} </span>
+            </md-button>
+            
+        </div>
+        
+        
+        
+        <!----- [ Serach ] ----->
+        <div class="search-box">
+            <input class="" type="text"  ng-model="query" />
+            <span class="icon pshop-search2"></span>
+        </div>
+        
+        
+        
+        <!----- [ category or product List ] -----> 
+        <div class="list">
+            <ul as-sortable="sortableOptions" ng-model="box.itemList">
+                <li ng-repeat="item in box.itemList  | filter:query" ng-show="box.itemList" as-sortable-item  class="item as-sortable-item {{(item.selected)?'selected':''}} ">
+                    <a ng-click="itemClick(box,item)"  data-as-sortable-item-handle   class="as-sortable-item-handle"  href="">
+                        <span class="icon {{(item.type_id!=0)?  (item.selected)?'pshop-folder-open':'pshop-folder2' :(item.selected)?'pshop-folder-open-o':'pshop-folder-o'}}   "></span>
+                        <span class="caption">{{item.title}}  </span>
+                        <div  class="toolbar"> 
+                            <span ng-click="delete(box,item)" class="pshop-trashcan"></span>
+                            <span class="pshop-write"></span>  
+                        </div> 
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        
+        <!----- [ Message Box ] -----> 
+        <div ng-hide="(box['itemList']==0)?0:1"  class="empty-message">
+            <p> <span class="icon pshop-info-outline"></span>{{Translate.PRODUCT.CAT_EMPTY_MESSAGE}}</p>
+            <a href=""><span class="icon pshop-plus"></span> {{Translate.PRODUCT.ADD_CAT}}</a>
+        </div>
+        
+        
+            
+    </section>
+    
+    
+    
+
+
+
+=======
 
     <section class="box" flex="15">
 
@@ -61,4 +128,5 @@
     </section>
 
 
+>>>>>>> origin/master
     </div>

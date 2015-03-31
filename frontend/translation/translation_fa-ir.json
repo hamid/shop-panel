@@ -15,7 +15,11 @@
         "SET_TYPE":"تعیین نوع",
         "SHOW":"نمایش",
         "ADD_CAT":"ایجاد دسته",
+<<<<<<< HEAD
+        "CAT_EMPTY_MESSAGE":"دسته ای وجود ندارد ",
+=======
         "CAT_EMPTY_MESSAGE":"دسته ای وجود ندارید ",
+>>>>>>> origin/master
         "ADD_PRODUCT":"ایجاد محصول",
         "PRODUCT_EMPTY_MESSAGE":"محصولی ای وجود ندارید "
     },

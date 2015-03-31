@@ -1,0 +1,15 @@
+search [LOCAL CHANGE] and change it in below way 
+
+[CINFIG DIR]
+slim.php  =>  'templates.path' =>'.\frontend'
+app.php   =>  'url_prefix' => '/'
+app.php   =>  'language' => 'en-us'
+app.php   =>  'direction' => 'ltr'
+
+
+
+
+
+index.php   => require __DIR__.'/lib/driver.php';       => un comment
+index.php   => <base />                                 => replcae with ./frontend/
+index.php   => angular-i18n/angular-locale_fa-ir.js     => replace en 

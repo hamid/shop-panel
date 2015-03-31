@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="mainApp" >
+<<<<<<< HEAD
+<head>
+
+  <base href="frontend/" target="_blank">  
+=======
 <head> 
+>>>>>>> origin/master
   
   <base href="./frontend/" target="_blank">   
   <meta charset="utf-8">
@@ -9,12 +15,15 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+<<<<<<< HEAD
+=======
   
   
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   
+>>>>>>> origin/master
   <!-- Angular Material Dependencies -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
   
@@ -22,6 +31,16 @@
   <link rel="stylesheet" href="template/<?php echo($app_config['template']); ?>/style.css">
   <!-- Css of Panel Language -->
   <link rel="stylesheet" href="template/<?php echo($app_config['template'].'/lang/'.$app_config['language']); ?>/style.css">
+  
+  <!-- Tools -->
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="bower_components/ng-sortable/dist/ng-sortable.min.css">
+  
+  
+  
   
 </head>
 <body class=" <?php echo($app_config['direction']); ?> " layout="row">
@@ -66,12 +85,19 @@
     <script src="bower_components/angular-material/angular-material.min.js"></script>
   
     <script src="bower_components/angular-i18n/angular-locale_en-us.js"></script>
+    
+     <!-- jquery tools -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    
+    <!-- Tools -->
+    <script src="bower_components/ng-sortable/dist/ng-sortable.min.js" type="text/javascript"></script>
  
     <!--App Config-->
     <script type="text/javascript">
         window.appConfig = {
-               language:"<?php echo($app_config['language']); ?>",
-               direction:"<?php echo($app_config['direction']); ?>"
+               language     :"<?php echo($app_config['language']); ?>",
+               direction    :"<?php echo($app_config['direction']); ?>",
+               urlPrefix    :"<?php echo($app_config['url_prefix']); ?>"
         };
     </script>
 

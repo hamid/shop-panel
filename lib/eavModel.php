@@ -1,16 +1,14 @@
 <?php
 
-class eav{
+class EAV{
     
     public  static $DB;
-    public  static $product_tabble          =   'product';
-    public  static $product_value           =   'product_type_field_value';
     
     public  static $default_query_count     = 10;
     
     
    /**
-   * Core::setDriver()
+   * EAV::setDriver()
    *    set database driver
    *    this driver should have query,fetch,loadInArray methods
    * 
@@ -22,12 +20,85 @@ class eav{
 
     
    /**
-   * Core::search()
+   * EAV::getCategoryListByParent()
+   *    get list of categories(children) of specific category
+   * 
+   * @param int $parent_id number(id) category that method should return its 
+   *            children, $parent_id = 0 means get root category.
+   * @param array,string $fields array of require fields, default is *
+   * @return array of category 
+   */
+    public static function getCategoryListByParent($parent_id = 0,$fields = '*')
+    {
+        $parentCategory   = new Category(array('id'=>$parent_id));
+        $children         = $parentCategory->getChildren($fields);
+        
+        return $children;
+    }
+
+    
+   /**
+   * EAV::sortCategories()
+   *    sort categories by array of id and its priority
+   * 
+   * @param array $sortedItems array of sorted catrgories that  has two key
+   *        `id` and its `priority`
+   * @param int $parent_id  parent id of items in $sortedItems
+   * @return array of result 
+   */
+    public static function sortCategories($sortedItems,$parent_id)
+    {
+        if(!$parent_id && $parent_id !=0) return false;
+        // load children of curent parent id
+        $allowedCategoryObj     =   EAV::getCategoryListByParent($parent_id,array('id'));
+        foreach($allowedCategoryObj as $item)
+            $allowedCategory[$item->id]    = true;
+        $sortedCat              =   array();
+        
+        if(is_array($sortedItems))
+            foreach($sortedItems as $category)
+            {
+                if(!$allowedCategory[$category['id']])  break;
+                if($sortedCat[$category['id']])         continue; 
+                
+                $cat   = new Category(  array('id'=>$category['id'])    );
+                $cat->update(   array(
+                                    'priority'=>intval( $category['priority'] )
+                            ));
+                $sortedCat[$category['id']]  = true;
+            }
+        return $sortedCat;  
+    }
+    
+    
+    
+    
+   /**
+   * EAV::changeCategoryParent()
+   *    Change Category Parent id 
+   * 
+   * @param array $sortedItems array of sorted catrgories that  has two key
+   *        `id` and its `priority`
+   * @param int $parent_id  parent id of items in $sortedItems
+   * @return array of result 
+   */
+    public static function changeCategoryParent($categoryId,$newParent_id)
+    {
+        $cat   = new Category(  array('id'=>$categoryId)    );
+        return   $cat->update(  array(
+                                    'parent_id'=>intval( $newParent_id )
+                             ));
+    }
+    
+    
+    
+   /**
+   * EAV::search()
    *    serach in EAV model
    *    search in custom field of each product 
    *    the search and its comparison is `AND` type
    * 
-   * @param  array $array array contains field number as `key` and field value 
+   * @param  array $array array contains field id as `key` and field value 
    *   as `value` of itself
    * @param  int   $start start of products pointer(used in pagination)
    * @param  int   $limit count of products in each query 
@@ -51,6 +122,8 @@ class eav{
         
         return $res;
     }
+    
+   
     
 }
 

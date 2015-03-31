@@ -1,16 +1,55 @@
 <?php
 
 
-$app->get($app_config['url_prefix'], function () use ($app,$app_config){
+
+$app->get($app_config['url_prefix'], function() use ($app,$app_config){
     
     $app->render('/index.php',array(
         'app_config'=>$app_config
     ));
    
 });
-$app->get($app_config['url_prefix'].'/hello/:name', function ($name) use ($app){
-    echo "Hello, $name . its test.";
+
+
+/* ------------------------------ P R O D U C T S ------------------------------ */
+
+$app->group($app_config['url_prefix'].'/product', function () use ($app){
+    
+    
+        $app->post('/getCatList', function() use ($app){
+            json_output( EAV::getCategoryListByParent($_POST['catid']) );
+        });
+
+        $app->post('/sortCategories', function() use ($app){
+            json_output( EAV::sortCategories($_POST['list'],$_POST['parentId']) );
+        });
+
+        $app->post('/changeCategoryParent', function() use ($app){
+            json_output( EAV::changeCategoryParent($_POST['itemId'],$_POST['newParentId']) );
+        });
+    
+    
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function json_output($data)
+{
+    header("Content-Type: application/json");
+    echo json_encode($data);
+}
 
 /*
 $app->notFound(function () use ($app) {

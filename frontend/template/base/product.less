@@ -4,6 +4,10 @@
 @text-color             : @color-gray-3;
 @item-hover-color       : lighten(@color-gray-1,7%);
 @item-active-color      : @color-primary;
+<<<<<<< HEAD
+@item-drag-color        : lighten(@color-gray-1,7%);
+=======
+>>>>>>> origin/master
 
 
 
@@ -17,6 +21,31 @@
     border-color    :@box-border-color;
     border-style    :solid;
     transition      :all ease-in 250ms;
+<<<<<<< HEAD
+    opacity: 1;
+    transform:translate(0px);
+    -webkit-transform:translate(0px);
+    
+    
+    /* animate item based on angular */
+            &.ng-enter,&.ng-leave,&.ng-move{
+                -webkit-transition: 0.5s linear all;
+                -moz-transition: 0.5s linear all;
+                -o-transition: 0.5s linear all;
+                transition: 0.5s linear all;
+            }
+            &.ng-enter,&.ng-move{
+                &.ng-move-active,&.ng-enter-active{}
+            }
+            &.ng-leave{
+                opacity:1;
+                &.ng-leave-active{
+                    opacity:0;
+                }
+            }
+    
+=======
+>>>>>>> origin/master
     
     .header{
         color   :@link-color;
@@ -64,7 +93,11 @@
         ul{list-style:none;padding:0px 4px}
         .item{
             margin-top      :2px;
+<<<<<<< HEAD
+            padding         :0px;
+=======
             padding         :3px;
+>>>>>>> origin/master
             transition      :all ease-in 100ms;
             border-radius   :2px;
             overflow        :hidden;
@@ -73,7 +106,11 @@
                 background:@item-hover-color;
                 & .toolbar{
                     transform   : translateX(0px) !important;
+<<<<<<< HEAD
+                    opacity     : .7;
+=======
                     opacity     : .5;
+>>>>>>> origin/master
                 }
             }
             
@@ -88,7 +125,11 @@
                 opacity: 0;
                 font-size   : 16px;
                 span{
+<<<<<<< HEAD
+                    vertical-align: top;
+=======
                     vertical-align: middle;
+>>>>>>> origin/master
                     &:hover{
                         color:@item-active-color ;
                     }
@@ -96,8 +137,14 @@
             }
             
             
+<<<<<<< HEAD
+            a,md-button{
+                display         :block;
+                padding         :3px;
+=======
             a{
                 display         :block;
+>>>>>>> origin/master
                 vertical-align  :sub;
                 color           :@text-color;
                 .icon{
@@ -105,17 +152,48 @@
                     margin          :0px 13px;
                     &.pshop-folder-open-o
                     {
+<<<<<<< HEAD
+                        margin      :0px 10px;
+=======
                         margin  :0px 10px;
+>>>>>>> origin/master
                     }
                     &.pshop-folder2{
                         font-size   :20px;
                     }
+<<<<<<< HEAD
+                } 
+                .caption{
+                    padding:1px;
+                }
+            }
+            
+            
+            /* animate item based on angular */
+            &.ng-enter,&.ng-leave,&.ng-move{
+                -webkit-transition: 0.5s linear all;
+                -moz-transition: 0.5s linear all;
+                -o-transition: 0.5s linear all;
+                transition: 0.5s linear all;
+            }
+            &.ng-enter,&.ng-move        {opacity:0;}
+            &.ng-move.ng-move-active,
+            &.ng-enter.ng-enter-active  {opacity:1;}
+            &.ng-leave                  {opacity:1;}
+            &.ng-leave.ng-leave-active  {opacity:0;}
+            
+            
+        }
+        
+        
+=======
                 }   
             }
             
             
             
         }
+>>>>>>> origin/master
     }// End List
     
     .empty-message{
@@ -137,3 +215,27 @@
 
 
 }
+<<<<<<< HEAD
+
+// Drag item
+.as-sortable-placeholder{background:@item-drag-color}
+
+.as-sortable-drag{
+    li{
+        &:extend(.product .box .list .item all);
+        box-shadow          :3px 3px 0px rgba(0,0,0,.1);
+       .as-sortable-item-handle{
+           &:extend(.product .box .list .item a all);
+            border              :1px solid @box-border-color;
+            border-bottom       :1px solid darken(@box-border-color,10%);
+            opacity             :.85;
+            background          :@item-drag-color;
+            vertical-align      :middle;
+            .icon{vertical-align      :middle;}
+            .toolbar{display:none;}
+        }
+    }
+    
+}
+=======
+>>>>>>> origin/master

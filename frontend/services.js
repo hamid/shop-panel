@@ -20,7 +20,6 @@ TranslateService.factory('Translate', ['$resource','$http',
         $http.get(languageFilePath).
             success(function(data, status, headers, config) {
               $scope.Translate = data;
-              console.log(data);
             }).
             error(function(data, status, headers, config) {alert('error in loading language:Translate Service');});
     };

@@ -1,9 +1,8 @@
 <?php
 /**
+ * Shop Panel
  * 
- * 
- * @package xsxhamid
- * @author Hamid Reza Salimian
+ * @author Hamid Reza Salimian (github.com/hamid)
  * @copyright 2015
  * @version 1.0
  * 
@@ -29,6 +28,7 @@ require __DIR__.'/vendor/autoload.php';
 |--------------------------------------------------------------------------
 |
 | Contains all config for our shop application
+| config of database ,application and slim framework 
 |
 */
 require __DIR__.'/config/loader.php';
@@ -54,16 +54,46 @@ $driver->connect(
 
 /*
 |--------------------------------------------------------------------------
-| EAV & product Class
+| EAV  Class
 |--------------------------------------------------------------------------
 |
 | EAV :Entity attribute value, a class contains methods for Create, Read,
-| Update and Delete Product based on EAV model in Database
+| Update and Delete Product,Category based on EAV model in Database
+| the outputs of methods are usually objects of products or category 
 |
 */
 require __DIR__.'/lib/eavModel.php';
-require __DIR__.'/lib/product.php';
+
 eav::setDriver($driver);
+
+/*
+|--------------------------------------------------------------------------
+| Category,Pruduct Class
+|--------------------------------------------------------------------------
+|
+| contain  methods for fetch, Create, Update and Delete Categories,Pruducts
+|
+*/
+require __DIR__.'/lib/Category.php';
+require __DIR__.'/lib/Product.php';
+
+Category::setOption(
+                    array(
+                          'driver'  =>  $driver,
+                          'table'   =>  $db_config['tables']['categories']
+                    )
+);
+Product::setOption(
+                    array(
+                          'driver'  =>  $driver,
+                          'table'   =>  $db_config['tables']['products']
+                    )
+);
+
+
+
+
+
 
 
 
@@ -90,7 +120,6 @@ $app = new \Slim\Slim($slim_config);
 | 
 */
 require __DIR__.'/routes.php';
-
 
 $app->run();
 
