@@ -10,7 +10,8 @@ $app_config = array(
         | its useful when you want to separate this app from main site.
 	|
 	*/
-          'url_prefix'      => '/',
+           // [LOCAL CHANGE]  'url_prefix' => '/'
+          'url_prefix'      => '/cp_'.SHOP_URL,
     
     
         /*
@@ -38,7 +39,8 @@ $app_config = array(
 	| the value shuld be locale ID(i18n)
         |
 	*/
-          'language' => 'en-us',
+        // [LOCAL CHANGE]  'language' => 'en-us'
+          'language' => 'fa-ir',
                   
                   
         /*
@@ -51,7 +53,8 @@ $app_config = array(
         | or          `rtl` => Right To Left
         |
 	*/
-          'direction' => 'ltr',
+        // [LOCAL CHANGE]  'direction' => 'ltr'
+          'direction' => 'rtl',
                   
                        
         /*

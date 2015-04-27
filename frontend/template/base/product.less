@@ -4,10 +4,7 @@
 @text-color             : @color-gray-3;
 @item-hover-color       : lighten(@color-gray-1,7%);
 @item-active-color      : @color-primary;
-<<<<<<< HEAD
 @item-drag-color        : lighten(@color-gray-1,7%);
-=======
->>>>>>> origin/master
 
 
 
@@ -21,7 +18,6 @@
     border-color    :@box-border-color;
     border-style    :solid;
     transition      :all ease-in 250ms;
-<<<<<<< HEAD
     opacity: 1;
     transform:translate(0px);
     -webkit-transform:translate(0px);
@@ -29,23 +25,25 @@
     
     /* animate item based on angular */
             &.ng-enter,&.ng-leave,&.ng-move{
-                -webkit-transition: 0.5s linear all;
-                -moz-transition: 0.5s linear all;
-                -o-transition: 0.5s linear all;
-                transition: 0.5s linear all;
+                -webkit-transition: 150ms linear all;
+                -moz-transition: 150ms linear all;
+                -o-transition: 150ms linear all;
+                transition: 150ms linear all;
             }
-            &.ng-enter,&.ng-move{
-                &.ng-move-active,&.ng-enter-active{}
+            &.ng-enter{
+                opacity:0;
+                &.ng-enter-active{
+                    opacity:1;
+                }
             }
             &.ng-leave{
+                -webkit-transition: 0s linear all;
                 opacity:1;
                 &.ng-leave-active{
                     opacity:0;
                 }
             }
     
-=======
->>>>>>> origin/master
     
     .header{
         color   :@link-color;
@@ -92,12 +90,9 @@
     .list{
         ul{list-style:none;padding:0px 4px}
         .item{
+            position        :relative;
             margin-top      :2px;
-<<<<<<< HEAD
             padding         :0px;
-=======
-            padding         :3px;
->>>>>>> origin/master
             transition      :all ease-in 100ms;
             border-radius   :2px;
             overflow        :hidden;
@@ -106,11 +101,7 @@
                 background:@item-hover-color;
                 & .toolbar{
                     transform   : translateX(0px) !important;
-<<<<<<< HEAD
                     opacity     : .7;
-=======
-                    opacity     : .5;
->>>>>>> origin/master
                 }
             }
             
@@ -125,11 +116,7 @@
                 opacity: 0;
                 font-size   : 16px;
                 span{
-<<<<<<< HEAD
                     vertical-align: top;
-=======
-                    vertical-align: middle;
->>>>>>> origin/master
                     &:hover{
                         color:@item-active-color ;
                     }
@@ -137,44 +124,64 @@
             }
             
             
-<<<<<<< HEAD
             a,md-button{
                 display         :block;
                 padding         :3px;
-=======
-            a{
-                display         :block;
->>>>>>> origin/master
                 vertical-align  :sub;
+                cursor          :pointer;
                 color           :@text-color;
                 .icon{
                     font-size       :22px;
                     margin          :0px 13px;
                     &.pshop-folder-open-o
                     {
-<<<<<<< HEAD
                         margin      :0px 10px;
-=======
-                        margin  :0px 10px;
->>>>>>> origin/master
                     }
                     &.pshop-folder2{
                         font-size   :20px;
                     }
-<<<<<<< HEAD
                 } 
                 .caption{
                     padding:1px;
                 }
             }
             
+            /* progress bar */
+            md-progress-linear {
+                @bar-height:60px;
+                display :none;
+                position:absolute;
+                top     :0px;
+                left    :0px;
+                z-index :50;
+                opacity:.5;
+                
+                &.active{display:block}
+
+                .md-container{
+                   top             : 0px;
+                   height          : @bar-height;
+                   background-color: rgba(0,0,0,0);
+                }
+                .md-bar{
+                   background-color : rgba(255,255,255,.8);
+                   height           : @bar-height;
+                }
+                .md-bar1,.md-bar2{
+                    animation-duration        : 3000ms;
+                    -webkit-animation-duration: 3000ms;
+                }
+                
+                
+            }
+            
             
             /* animate item based on angular */
             &.ng-enter,&.ng-leave,&.ng-move{
-                -webkit-transition: 0.5s linear all;
-                -moz-transition: 0.5s linear all;
-                -o-transition: 0.5s linear all;
-                transition: 0.5s linear all;
+                -webkit-transition: 0.3s linear all;
+                -moz-transition: 0.3s linear all;
+                -o-transition: 0.3s linear all;
+                transition: 0.3s linear all;
             }
             &.ng-enter,&.ng-move        {opacity:0;}
             &.ng-move.ng-move-active,
@@ -183,17 +190,11 @@
             &.ng-leave.ng-leave-active  {opacity:0;}
             
             
-        }
-        
-        
-=======
-                }   
-            }
-            
             
             
         }
->>>>>>> origin/master
+        
+        
     }// End List
     
     .empty-message{
@@ -215,7 +216,6 @@
 
 
 }
-<<<<<<< HEAD
 
 // Drag item
 .as-sortable-placeholder{background:@item-drag-color}
@@ -237,5 +237,3 @@
     }
     
 }
-=======
->>>>>>> origin/master

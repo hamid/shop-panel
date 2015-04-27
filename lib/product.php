@@ -27,8 +27,7 @@ class Product
     
     
 
-    public function __construct($id,$initData = array()) {
-        $this->id   = $id;
+    public function __construct($initData = array()) {
         foreach ($initData as $field=>$val)
             $this->$field = $val;
     }
@@ -47,6 +46,22 @@ class Product
     }
 
     
+    /**
+   * Product->update()
+   *    update fields of product
+   * 
+   * @param array $fields array of fields that should be update
+   *                     
+   * @return boolean stat of update
+  */
+    public function update($fields)
+    {
+        $fields = implode(' , ', array_map(function ($v, $k) { return "`$k`='$v'"; }, $fields, array_keys($fields)));
+        return    self::$driver->query(" UPDATE ".self::$table."
+                                         SET    $fields 
+                                         WHERE  `id`      =  '".  $this->id   ."';"
+                                       );
+    }
 
 
 

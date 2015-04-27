@@ -43,7 +43,7 @@ require __DIR__.'/config/loader.php';
 | a simple class that connect to mysql and has methods for working with it
 |
 */
-require __DIR__.'/lib/driver.php';
+//  [LOCAL CHANGE]   require __DIR__.'/lib/driver.php';
 $driver     =   new DB;
 $driver->connect(
                     $db_config['username'],
@@ -79,14 +79,15 @@ require __DIR__.'/lib/Product.php';
 
 Category::setOption(
                     array(
-                          'driver'  =>  $driver,
-                          'table'   =>  $db_config['tables']['categories']
+                          'driver'         =>  $driver,
+                          'table'          =>  $db_config['tables']['categories'],
+                          'prucuctTable'   =>  $db_config['tables']['products']
                     )
 );
 Product::setOption(
                     array(
-                          'driver'  =>  $driver,
-                          'table'   =>  $db_config['tables']['products']
+                          'driver'         =>  $driver,
+                          'table'          =>  $db_config['tables']['products']
                     )
 );
 

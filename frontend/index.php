@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="mainApp" >
-<<<<<<< HEAD
 <head>
-
-  <base href="frontend/" target="_blank">  
-=======
-<head> 
->>>>>>> origin/master
+    <!--[ LOCAL CHANGE ]-->
+  <base href="<?php echo(Core::$CDN.'app/shop/'); ?>" target="_blank">  
   
-  <base href="./frontend/" target="_blank">   
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>E-Shop</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-<<<<<<< HEAD
-=======
-  
-  
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-  
->>>>>>> origin/master
   <!-- Angular Material Dependencies -->
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
   
@@ -33,11 +19,13 @@
   <link rel="stylesheet" href="template/<?php echo($app_config['template'].'/lang/'.$app_config['language']); ?>/style.css">
   
   <!-- Tools -->
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <link  href="bower_components/html5-boilerplate/css/normalize.css" rel="stylesheet">
+  <link  href="bower_components/html5-boilerplate/css/main.css"rel="stylesheet">
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   
-  <link rel="stylesheet" type="text/css" href="bower_components/ng-sortable/dist/ng-sortable.min.css">
+  <link href="bower_components/ng-sortable/dist/ng-sortable.min.css" rel="stylesheet" type="text/css">
+
   
   
   
@@ -78,15 +66,17 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
 
     <!-- Angular Material Dependencies -->
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
   
-    <script src="bower_components/angular-i18n/angular-locale_en-us.js"></script>
+    <!--[ LOCAL CHANGE ]-->
+    <script src="bower_components/angular-i18n/angular-locale_fa-ir.js"></script>
     
-     <!-- jquery tools -->
+     <!-- jquery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     
     <!-- Tools -->
@@ -103,15 +93,17 @@
 
 
     <!-- Main Module and Router -->
-    <script src="app.js"></script>
-    <script src="services.js"></script>
-  
+    <script src="app/app.js"></script>
+    
+    <!-- Servises : Factory, Service, Provider -->
+    <script src="app/services/factory/translate.js"></script>
+    <script src="app/services/factory/product.js"></script>
   
     <!-- Controllers -->
-    <script  src="controllers/statistics.js"></script>
-    <script  src="controllers/products.js"></script>
-    <script  src="controllers/topMenu.js"></script>
-    <script  src="controllers/sidebar.js"></script>
+    <script  src="app/controllers/statistics.js"></script>
+    <script  src="app/controllers/products.js"></script>
+    <script  src="app/controllers/topMenu.js"></script>
+    <script  src="app/controllers/sidebar.js"></script>
   
 
 </body>

@@ -13,10 +13,29 @@
     "PRODUCT":{
         "ADD":"Add",
         "SET_TYPE":" Set Type",
+        "SELECT_TYPE":"Select Type",
+        "ADD_TYPE":" Add Type",
+        "NO_TYPE":"No Type",
         "SHOW":"Show",
         "ADD_CAT":" Add Cat ",
+        "CAT_TITLE": "Category Title",
         "CAT_EMPTY_MESSAGE":"There is no Category ",
+        "PRODUCT_EMPTY_MESSAGE":"There is no Product ",
         "ADD_PRODUCT":" Add Product",
-        "PRODUCT_EMPTY_MESSAGE":" There is no Product in this Category "
+        "PRODUCT_EMPTY_MESSAGE":" There is no Product in this Category ",
+        "CAN_NOT_DROP_PRODUCT":" the Product can not drop in this Category"
+    },
+    
+    "SAVE":"Save",
+    "ADD":"Add",
+    "DELETE":"Delete",
+    "EDIT":"Edit",
+    "CLOSE":"Close",
+    "CHOOSE":"Choose",
+    
+    
+    "INPUT_VALIDATION":{
+        "REQUIRE":"this field is Require"
     }
+    
 }

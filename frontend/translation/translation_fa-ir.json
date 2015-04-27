@@ -13,17 +13,32 @@
     "PRODUCT":{
         "ADD":"ایجاد",
         "SET_TYPE":"تعیین نوع",
+        "SELECT_TYPE":"انتخاب نوع",
+        "ADD_TYPE":"ایجاد نوع",
+        "NO_TYPE":"بدون  نوع",
         "SHOW":"نمایش",
+        "CAT_TITLE": " عنوان دسته ",
         "ADD_CAT":"ایجاد دسته",
-<<<<<<< HEAD
         "CAT_EMPTY_MESSAGE":"دسته ای وجود ندارد ",
-=======
-        "CAT_EMPTY_MESSAGE":"دسته ای وجود ندارید ",
->>>>>>> origin/master
+        "PRODUCT_EMPTY_MESSAGE":"محصولی  وجود ندارد ",
         "ADD_PRODUCT":"ایجاد محصول",
-        "PRODUCT_EMPTY_MESSAGE":"محصولی ای وجود ندارید "
+        "PRODUCT_EMPTY_MESSAGE":"محصولی ای وجود ندارید ",
+        "CAN_NOT_DROP_PRODUCT":" محصول مورد نظر در این دسته قرار نمی گیرد "
+        
     },
     
-    "HELLO" : "Helloooooooo",
-    "HELLO_WORLD" : " Hello World!"
+    "SAVE":"ذخیره",
+    "ADD":"ایجاد",
+    "DELETE":"حذف",
+    "EDIT":"ویرایش",
+    "CLOSE":"بستن",
+    "CHOOSE":"انتخاب",
+    
+    
+    "INPUT_VALIDATION":{
+        "REQUIRE":"این فیلد ضروری است"
+    }
+    
+    
+    
 }

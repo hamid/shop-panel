@@ -1,97 +1,28 @@
-/* Products Controller */
 
-mainApp.controller('ProductsCtrl', ['$scope', '$http','Translate','$mdDialog',
-  function ($scope, $http, Translate,$mdDialog) {
-      
-     /* Translation Setup,fill $scope with language words */
-      Translate.getTranslation($scope,appConfig.language);
-     
-     
-   /* ------------ Initialize ------------ */
-      ProductHelper.init($scope,$http);
-      
-      $scope.boxList      = [];
-      ProductHelper.makeBox(    {id:0}  ); // make root category
-      
-
-      
-  /* ------------  Event Function  ------------ */
-      $scope.itemClick   = function(box,item){
-          
-          for(var i=0; box.itemList[i]; i++)
-              box.itemList[i].selected = false;
-          item.selected     = true;
-          
-          ProductHelper.removeNextBox(box);
-          ProductHelper.makeBox(item);
-
-              
-          
-          
-      }
-      
-      // Sortable/DragDrop Events for Categories
-      $scope.sortableOptions = {
-            accept: function (sourceItemHandleScope, destSortableScope) {
-                return true;
-            },
-            orderChanged: function(data){  
-                var sortedList          = data.dest.sortableScope.modelValue;
-                return ProductHelper.sortItems(sortedList);   
-            },
-            itemMoved: function (data) {
-                var movedItem        =   data.source.itemScope.item;
-                var box              =   data.dest.sortableScope.$parent.box;
-                var sortedList       =   data.dest.sortableScope.modelValue;
-
-                ProductHelper.changeCategoryParent(movedItem.id,box.catid).success(function(data, status, headers, config) {
-                    return ProductHelper.sortItems(sortedList);
-                }).
-                error(function(){alert('Error in changeCategoryParent | product ctrl')})
-                
-            }
-        };
-      
-      
-      
-      $scope.addClick   = function(box,event){
-          $mdDialog.show(
-            $mdDialog.alert()
-              .title('This is an alert title')
-              .content('You can specify some description text in here.')
-              .ariaLabel('Password notification')
-              .ok('Got it!')
-              .targetEvent(event)
-          );
-      }
-      
-      $scope.delete = function(box,item){
-         console.log(pos = box.itemList.indexOf(item)); 
-         pos > -1 && box.itemList.splice( pos, 1 );
-         
-      }
-      
-      
-
-  }]);
-  
-  
-  
-  
 /**
-* ProductHelper object
+* ProductFactory object
 * the object contains functions work with products 
 * its connected to Product Controller
 */
-  var ProductHelper = {
+  
+  
+var ProductService = angular.module('ProductFactory', ['ngResource']);    
+    ProductService.factory('ProductFactory', ['$resource','$http','$q',
+  function($resource,$http,$q){
+      
+   
+      
+   return  {
     
  /* scope of controller used in view */
-    $scope : false,
+    $scope          : false,
     
  /* $http of controller used in communication with the remote  */
-    $http : false,
+    $http           : $http,
+ /* $http of controller used in communication with the remote  */
+    productTypes    : [],
     
-    
+
     
     
 /*--------------------[ M E T H O D S ]--------------------*/
@@ -104,9 +35,8 @@ mainApp.controller('ProductsCtrl', ['$scope', '$http','Translate','$mdDialog',
     
     
     
-    makeBox:function(item)
+    makeBox:function(item,callback)
     {
-        console.log(this.getCatChildrenType(item));
         if(this.getCatChildrenType(item) == 'category')
         {
             var url         = '/product/getCatList';
@@ -117,16 +47,19 @@ mainApp.controller('ProductsCtrl', ['$scope', '$http','Translate','$mdDialog',
             var dataType    = 'product';
         }
         var parentid = item.id;
+        var selfFactory = this;
         
         /* fetch data */
         this.ajax(url,{catid:parentid}).success(function(data, status, headers, config) {
             boxObject   = {
-                boxid       : ProductHelper.$scope.boxList.length,
+                boxid       : selfFactory.$scope.boxList.length,
                 catid       : parentid,
                 itemList    : data,
                 type        : dataType,
             };
-            ProductHelper.$scope.boxList.push(boxObject);
+            selfFactory.$scope.boxList.push(boxObject);
+            if(typeof callback == 'function')
+                callback(data, status, headers, config);
         }).
         error(function(){alert('Error in fetch data | product ctrl')});
         
@@ -145,19 +78,33 @@ mainApp.controller('ProductsCtrl', ['$scope', '$http','Translate','$mdDialog',
      * @param  array itemList :  new sorted item list of one box 
      * @return boolean   
      */
-    sortItems:function(itemList)
+    sortItems:function(itemList,type)
     {
+        if(!type) alert('Error: Type is not set');
+        
         var orderList   = {};
         for(i in itemList)
             orderList[i] = {
                 id        :itemList[i].id,
                 priority  :i
             };
-        var params = {
-            list     :orderList,
-            parentId :itemList[i]['parent_id']
-        };
-        return this.ajax('/product/sortCategories',params);
+        if(type == 'category')
+        {
+            var params = {
+                list     :orderList,
+                parentId :itemList[i]['parent_id']
+            };
+            return this.ajax('/product/sortCategories',params);
+        }
+        else if(type == 'products')
+        {
+            var params = {
+                list     :orderList,
+                parentId :itemList[i]['cat']
+            };
+            return this.ajax('/product/sortProducts',params);
+        }
+        
     },
     
     
@@ -213,6 +160,33 @@ mainApp.controller('ProductsCtrl', ['$scope', '$http','Translate','$mdDialog',
         this.$scope.boxList = this.$scope.boxList.slice(0,baseBoxIndex+1);
     },
     
+    /**
+     * ProductHelper.getProductType()
+     *   Get All Product Types 
+     * 
+     * @param array list : list that should fill     
+     */
+    getProductType:function(list,func)
+    {
+        var deferred        = $q.defer();
+        selfFactory         = this;
+        
+        if(this.productTypes.length){
+            deferred.resolve(this.productTypes);
+        } 
+        
+        this.ajax('/product/getProductType',{}).success(function(data, status, headers, config) {
+            if(data){
+                selfFactory.productTypes  = data;
+                deferred.resolve(data);
+            }
+        }).
+        error(function(){deferred.reject(data);alert('Error in changeCategoryParent | product factory')});
+
+        return deferred.promise;
+          
+    },
+    
     
     
     
@@ -245,3 +219,6 @@ mainApp.controller('ProductsCtrl', ['$scope', '$http','Translate','$mdDialog',
     }
     
   };
+
+  }]);    
+

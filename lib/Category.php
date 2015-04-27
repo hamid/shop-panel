@@ -22,7 +22,8 @@ class Category
     
     
     protected static $driver;
-    protected static $table  =   'product_cat';
+    protected static $table         =   'product_cat';
+    protected static $prucuctTable  =   'product';
     
     
     
@@ -55,7 +56,6 @@ class Category
    * 
    * @param array|string $fields array of fields,
    *        it could be null means all field
-   *        options items lists in static properties of class
    * @return array of category class
   */
     public function getChildren($fields = '*')
@@ -73,6 +73,31 @@ class Category
             $list[] = new Category($row);
         
         return $this->children = $list;
+    }
+    
+  /**
+   * Category->getProducts()
+   *    get Products of this category
+   * 
+   * @param array|string $fields array of fields,
+   *        it could be null means all field
+   * @return array of product class
+  */
+    public function getProducts($fields = '*')
+    {
+        $list = array();
+        
+        if(is_array($fields))
+           $fields = '`'.implode ('`,`', $fields).'`';
+         
+        $result    = self::$driver->query(" SELECT      $fields "
+                                        . " FROM        ".self::$prucuctTable
+                                        . " WHERE       `cat`= '".intval($this->id)."'"
+                                        . " ORDER BY    `priority`; ");
+        while($row  = self::$driver->fetch($result))
+            $list[] = new Product($row);
+        
+        return $this->product = $list;
     }
     
     

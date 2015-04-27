@@ -35,6 +35,23 @@ class EAV{
         
         return $children;
     }
+    
+   /**
+   * EAV::getCategoryListByParent()
+   *    get list of categories(children) of specific category
+   * 
+   * @param int $parent_id number(id) category that method should return its 
+   *            children, $parent_id = 0 means get root category.
+   * @param array,string $fields array of require fields, default is *
+   * @return array of category 
+   */
+    public static function getProductListByParent($parent_id = 0,$fields = '*')
+    {
+        $parentCategory   = new Category(array('id'=>$parent_id));
+        $products         = $parentCategory->getProducts($fields);
+        
+        return $products;
+    }
 
     
    /**
@@ -69,6 +86,40 @@ class EAV{
             }
         return $sortedCat;  
     }
+
+    
+   /**
+   * EAV::sortProducts()
+   *    sort Products by array of id and its priority
+   * 
+   * @param array $sortedItems array of sorted products that  has two key
+   *        `id` and its `priority`
+   * @param int $parent_id  parent id of items in $sortedItems
+   * @return array of result 
+   */
+    public static function sortProducts($sortedItems,$parent_id)
+    {
+//        if(!$parent_id && $parent_id !=0) return false;
+//        // load children of curent parent id
+//        $allowedCategoryObj     =   EAV::getCategoryListByParent($parent_id,array('id'));
+//        foreach($allowedCategoryObj as $item)
+//            $allowedCategory[$item->id]    = true;
+//        $sortedCat              =   array();
+//        
+//        if(is_array($sortedItems))
+//            foreach($sortedItems as $category)
+//            {
+//                if(!$allowedCategory[$category['id']])  break;
+//                if($sortedCat[$category['id']])         continue; 
+//                
+//                $cat   = new Category(  array('id'=>$category['id'])    );
+//                $cat->update(   array(
+//                                    'priority'=>intval( $category['priority'] )
+//                            ));
+//                $sortedCat[$category['id']]  = true;
+//            }
+//        return $sortedCat;  
+    }
     
     
     
@@ -88,6 +139,25 @@ class EAV{
         return   $cat->update(  array(
                                     'parent_id'=>intval( $newParent_id )
                              ));
+    }
+    
+    
+    
+   /**
+   * EAV::getProductType()
+   *    Get All Product Types
+   * 
+   * @return array of result 
+   */
+    public static function getProductTypes()
+    {
+        $res     = self::$DB->query('SELECT  *
+                                    FROM    `product_type`
+                                    WHERE   `id` != 0; ');
+        /* Note: id = 0 means No Type , if a category has type with id =0 
+         *       it means Type is not set for category
+        */
+        return  self::$DB->loadInArray($res);
     }
     
     

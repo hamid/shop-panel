@@ -13,13 +13,20 @@ var TranslateService = angular.module('TranslateService', ['ngResource']);
 TranslateService.factory('Translate', ['$resource','$http',
   function($resource,$http){
       
+    var TranslateData = false;  
    /*  ----- [ M E T H O D S] -----  */
     this.getTranslation = function($scope, language)
     {
+        if(TranslateData)
+        {
+            return $scope.Translate=  TranslateData;
+             
+        }
         var languageFilePath = 'translation/translation_' + language + '.json';
         $http.get(languageFilePath).
             success(function(data, status, headers, config) {
-              $scope.Translate = data;
+              return TranslateData = $scope.Translate = data;
+               
             }).
             error(function(data, status, headers, config) {alert('error in loading language:Translate Service');});
     };
