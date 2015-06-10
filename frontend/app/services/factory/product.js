@@ -21,6 +21,7 @@ var ProductService = angular.module('ProductFactory', ['ngResource']);
     $http           : $http,
  /* $http of controller used in communication with the remote  */
     productTypes    : [],
+    accessList      : [],
     
 
     
@@ -46,17 +47,18 @@ var ProductService = angular.module('ProductFactory', ['ngResource']);
             var url         = '/product/getProductList';
             var dataType    = 'product';
         }
-        var parentid = item.id;
-        var selfFactory = this;
-        
+        var parentid        = item.id;
+        var selfFactory     = this;
         /* fetch data */
         this.ajax(url,{catid:parentid}).success(function(data, status, headers, config) {
-            boxObject   = {
+            
+            boxObject = new selfFactory.box({
                 boxid       : selfFactory.$scope.boxList.length,
                 catid       : parentid,
                 itemList    : data,
                 type        : dataType,
-            };
+            });
+            
             selfFactory.$scope.boxList.push(boxObject);
             if(typeof callback == 'function')
                 callback(data, status, headers, config);
@@ -166,7 +168,7 @@ var ProductService = angular.module('ProductFactory', ['ngResource']);
      * 
      * @param array list : list that should fill     
      */
-    getProductType:function(list,func)
+    getProductType:function(list)
     {
         var deferred        = $q.defer();
         selfFactory         = this;
@@ -181,11 +183,92 @@ var ProductService = angular.module('ProductFactory', ['ngResource']);
                 deferred.resolve(data);
             }
         }).
-        error(function(){deferred.reject(data);alert('Error in changeCategoryParent | product factory')});
+        error(function(){deferred.reject(data);alert('Error in getProductType | product factory')});
 
         return deferred.promise;
           
     },
+    
+    
+    /**
+     * ProductHelper.getProductType()
+     *   Get All Product Types 
+     * 
+     * @param array list : list that should fill     
+     */
+    getAccessList:function(list)
+    {
+        var deferred        = $q.defer();
+        selfFactory         = this;
+        
+        if(this.accessList.length){
+            deferred.resolve(this.accessList);
+        } 
+        
+        this.ajax('/product/getAccessList',{}).success(function(data, status, headers, config) {
+            if(data){
+                selfFactory.accessList  = data;
+                deferred.resolve(data);
+            }
+        }).
+        error(function(){deferred.reject(data);alert('Error in getAccessList | product factory')});
+
+        return deferred.promise;
+          
+    },
+    /**
+     * ProductHelper.addCategory()
+     *   add new Category 
+     * 
+     * @param  string name    
+     * @param  int    type 
+     * @param  int    categoryid 
+     * 
+     * @return object  defer   
+     */
+    addCategory:function(catDataObj,box)
+    {
+        var selfFactory     = this;
+        var deferred        = $q.defer();
+        var ajaxInput       = {
+            title       :catDataObj.title,
+            type        :catDataObj.type,
+            access      :catDataObj.access,
+            categoryid  :catDataObj.categoryid,
+        };
+        var __self = this;
+        this.ajax('/product/addCategory',ajaxInput).success(function(data, status, headers, config) {
+            if(data){
+                box.addItem(data);
+                deferred.resolve(data);
+            }
+        })
+        .error(function(){
+            deferred.reject(data);
+            alert('Error in addCategory | product factory')
+        });
+
+        return deferred.promise; 
+    },
+
+          
+/*------------------------------------------------------------*/    
+/*---------------------- View Methods ------------------------*/
+/*------------------------------------------------------------*/
+    box:function(initialObj){
+        this.boxid       = initialObj.boxid;
+        this.catid       = initialObj.catid;
+        this.itemList    = initialObj.itemList;
+        this.type        = initialObj.type;
+        
+        this.addItem = function(dataObj){
+            this.itemList.push(dataObj);
+        }
+
+    },
+
+
+
     
     
     

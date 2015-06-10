@@ -19,6 +19,7 @@ class Category
     public     $parent_id;
     public     $title;
     public     $type_id;
+    public     $access;
     
     
     protected static $driver;
@@ -118,6 +119,26 @@ class Category
                                          WHERE  `id`      =  '".  $this->id   ."';"
                                        );
     }
+    
+    
+    /**
+   * Category->save()
+   *    save current category into Database
+   *                     
+   * @return int|boolean number of last inserted id or false
+  */
+    public function save()
+    {
+        $stat =    self::$driver->query("INSERT INTO `product_cat`( `priority`, `access`, `parent_id`, `title`, `type_id`) "
+                                     . "VALUES ('0','".$this->access."','".$this->parent_id."','".$this->title."','".$this->type_id."')");
+        
+        if($stat)
+            return $this->id = self::$driver->getLastId();
+        return false;
+    }
+    
+    
+    
     
     
     

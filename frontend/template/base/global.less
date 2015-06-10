@@ -27,6 +27,27 @@ a{
 }
 
 
+/*  Form Extension */
+form{
+    .desc
+    {
+        color:@color-gray-2;
+        padding:15px 0px;
+        font-size:11px;
+        span{
+            vertical-align:middle;
+            margin:0px 4px;
+            font-size:15px;
+        }
+    }
+    
+    input.ng-valid,md-select.ng-valid .md-select-label span
+    {
+        color:@color-primary !important;
+    }
+}
+
+
 /* set center position for `toast` component of Angular Material */
 @media (min-width: 600px){
 md-toast.md-center {

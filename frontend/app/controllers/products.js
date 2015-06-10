@@ -81,33 +81,54 @@ function ($scope, $http, Translate,ProductFactory,$mdDialog,$mdToast) {
     $scope.addCategoryDialog   = function(box,event)
     {
             ProductFactory.getProductType()
-                          .then(function(data){
-                                $scope.typesList = data;
-                          });
+                .then(function(data){
+                      $scope.typesList = data;
+                });
+            ProductFactory.getAccessList()
+                .then(function(data){
+                      $scope.accessList = data;
+                });
                           
             $mdDialog.show({
-                controller      : function($scope,parentScope,ProductFactory) {
-                                    $scope.parent      = parentScope;
-                                    $scope.closeDialog = function() {
-                                        $mdDialog.hide();
-                                    };
-                                    $scope.addCat = function(exp) {
-                                        console.log(addCatForm.$error);
-                                        console.log(exp);
-                                        alert('---');
-                                    };
-                                  },
-                templateUrl     : 'app/view/product/dialogs/addCategoryDialog.html?v113',
-                locals          : {parentScope: $scope},
-                targetEvent     : event
+                controller      :   function($scope,parentScope,ProductFactory) {
+                                        
+                                        $scope.parent        = parentScope;
+                                        /* ------------ Initialize ------------ */
+                                        ProductFactory.init(parentScope,$http);
+                                        
+                                        $scope.closeDialog   = function() {
+                                            $mdDialog.cancel();
+                                            return false;
+                                        };
+                                        $scope.addCat = function(form) {
+                                            ProductFactory.addCategory(
+                                                {
+                                                    title       :$scope.catTitle,
+                                                    type        :$scope.catType,
+                                                    categoryid  :box.catid,
+                                                    access      :$scope.accessList
+                                                },
+                                                box
+                                            ).then(function(data){
+                                                    $mdToast.show(
+                                                        $mdToast.simple()
+                                                            .content(parentScope.Translate.PRODUCT.CAN_NOT_DROP_PRODUCT)
+                                                            .position('top center')
+                                                            .hideDelay(4000)
+                                                    );
+                                            });
+                                            $mdDialog.hide();  
+                                        };/* end addCat  */
+                                    },/* end Controller */
+                templateUrl     :   'app/view/product/dialogs/addCategoryDialog.html?v1000',
+                locals          :   {parentScope: $scope},
+                targetEvent     :   event
             });
     }
     
       
       
-    $scope.createCategory   = function(box,event){
-            alert('--');
-    };
+    
       
     $scope.delete = function(box,item){
             pos > -1 && box.itemList.splice( pos, 1 );

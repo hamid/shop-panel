@@ -1,5 +1,5 @@
 <md-dialog flex="40">
-    <form name="addCatForm" ng-submit="addCat(addCatForm.$valid)"  novalidate>
+    <form name="addCatForm" ng-submit="addCat(addCatForm)"  novalidate>
         <md-content class="sticky-container">
             
             <md-toolbar class="md-theme-light">
@@ -10,14 +10,15 @@
 
             <div class="dialog-content" layout="row" layout-align="center start" >
                 <md-content class="md-padding" layout="column"  layout-align="center center" flex="100" layout-fill>
-                        <md-input-container layout-fill>
-                            <label>{{parent.Translate.PRODUCT.CAT_TITLE}}</label>
-                            <input type="text" name="catTitle"  required ng-model="catTitle">
-                            <div ng-messages="addCatForm.catTitle.$error" role="alert">
-                                <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
-                            </div>
-                        </md-input-container >
-
+                <!--Title-->
+                    <md-input-container layout-fill>
+                        <label>{{parent.Translate.PRODUCT.CAT_TITLE}}</label>
+                        <input type="text" name="catTitle"  required ng-model="catTitle">
+                        <div ng-messages="addCatForm.catTitle.$error" role="alert">
+                            <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                        </div>
+                    </md-input-container >
+                <!--select Type-->
                     <div layout="row" layout-align=" center" flex="100" layout-fill >
                         <md-select flex="33" ng-show="parent.typesList"  placeholder=" {{parent.Translate.PRODUCT.SELECT_TYPE}} " name="catType" required ng-model="catType">
                             <md-option ng-value="0" >{{parent.Translate.PRODUCT.NO_TYPE}}</md-option>
@@ -28,6 +29,18 @@
                             {{parent.Translate.PRODUCT.ADD_TYPE}}
                         </md-button>
                     </div>
+                    <div class="desc" layout="row" layout-align=" center" flex="100" layout-fill >
+                        <span class="icon pshop-info-outline ng-scope"></span>
+                        {{parent.Translate.PRODUCT.ADD_TYPE_TIP}}
+                    </div>
+                        
+                <!--Select Access--> 
+                    <div layout="row" layout-align=" center" flex="100" layout-fill >
+                        <md-select flex="33" ng-show="parent.accessList"  placeholder=" {{parent.Translate.PRODUCT.SELECT_ACCESS}} " name="accessList" required ng-model="accessList">
+                            <md-option ng-value="0"  >{{parent.Translate.PRODUCT.PUBLIC_ACCESS}}</md-option>
+                            <md-option ng-value="opt.id" ng-repeat="opt in parent.accessList">{{ opt.title }}</md-option>
+                        </md-select>
+                    </div>    
 
                 </md-content>
 
@@ -36,7 +49,7 @@
         </md-content>
         <div class="md-actions" layout="row">
             <span flex></span>
-            <md-button ng-click="closeDialog()">
+            <md-button type="button" ng-click="closeDialog()">
                 {{parent.Translate.CLOSE}}
             </md-button>
             <md-button ng-disabled="addCatForm.$invalid" type="submit" class="md-primary">

@@ -161,6 +161,44 @@ class EAV{
     }
     
     
+   /**
+   * EAV::getAccessList()
+   *    Get All access List
+   * 
+   * @return array of result 
+   */
+    public static function getAccessList()
+    {
+        return array();
+    }
+    
+    
+    
+    
+    
+    
+   /**
+   * EAV::addCategory()
+   *    add category 
+   * 
+   * @param string $name        name of category
+   * @param int    $type        type id of category
+   * @param int    $categoryid  category id (parent id)
+   * @return array of result 
+   */
+    public static function addCategory($title,$type,$categoryid,$access)
+    {
+        $cat   = new Category(array(
+                    'title'     => $title,
+                    'type_id'   => $type,
+                    'access'    => $access,
+                    'parent_id' => $categoryid,
+        ));
+        return ($cat->save())? $cat : false ;
+    }
+
+
+    
     
    /**
    * EAV::search()

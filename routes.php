@@ -11,7 +11,9 @@ $app->get($app_config['url_prefix'], function() use ($app,$app_config){
 });
 
 
+/* ----------------------------------------------------------------------------- */
 /* ------------------------------ P R O D U C T S ------------------------------ */
+/* ----------------------------------------------------------------------------- */
 
 $app->group($app_config['url_prefix'].'/product', function () use ($app){
     
@@ -33,6 +35,13 @@ $app->group($app_config['url_prefix'].'/product', function () use ($app){
         
         $app->post('/getProductType', function() use ($app){
             json_output( EAV::getProductTypes() );
+        });
+        $app->post('/getAccessList', function() use ($app){
+            json_output( EAV::getAccessList() );
+        });
+        
+        $app->post('/addCategory', function() use ($app){
+            json_output( EAV::addCategory($_POST['title'],$_POST['type'],$_POST['categoryid'],$_POST['access']) );
         });
     
     

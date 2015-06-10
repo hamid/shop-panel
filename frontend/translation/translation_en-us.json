@@ -16,6 +16,8 @@
         "SELECT_TYPE":"Select Type",
         "ADD_TYPE":" Add Type",
         "NO_TYPE":"No Type",
+        "SELECT_ACCESS":" Access Level",
+        "PUBLIC_ACCESS":"Public",
         "SHOW":"Show",
         "ADD_CAT":" Add Cat ",
         "CAT_TITLE": "Category Title",
