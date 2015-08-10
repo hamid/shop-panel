@@ -1,0 +1,90 @@
+<md-dialog class="typeDialog" flex="60">
+    <md-toolbar class="md-theme-light">
+        <h2 class="md-toolbar-tools">
+              <span>{{parent.Translate.PRODUCT.ADD_TYPE}}</span>
+        </h2>
+    </md-toolbar>
+    <div ng-click="closeDialog()" class="close-btn icon pshop-close"></div>
+    <form name="typeForm" ng-submit="submitTypeForm(catForm)"  novalidate>
+        <md-content class="sticky-container content">
+            
+            <div class="dialog-content" layout="row" layout-align="center start" >
+                <md-content class="" layout="row"  layout-align="space-between start" flex="100" layout-fill>
+                    
+                    <!--Type List-->
+                    <div class="type-list" flex="20" >
+                        <md-list >
+                            <md-subheader class="md-no-sticky">{{parent.Translate.PRODUCT.TYPE_LIST}}</md-subheader>
+                            <md-list-items ng-repeat="item in parent.typesList " layout="row">
+                                <md-button flex="100" type="button" ng-click="typeClick(item,$event)" class="item-type-btn">
+                                    <md-progress-linear ng-show="isTypeLoading[item.id]" md-mode="indeterminate"></md-progress-linear>
+                                    {{item.title}}
+                                </md-button>
+                            </md-list-items>
+                            <md-list-items layout="row">
+                                <md-button flex="100" type="button" ng-click="resetForm('add')" class="add-type-btn">
+                                    <span class="icon pshop-plus ng-scope"></span>
+                                    {{parent.Translate.ADD}}
+                                </md-button>
+                            </md-list-items>
+                        </md-list>
+                        
+                    </div>
+                    
+                    <!--Add/Edit Type Form-->
+                    <div class="type-form" flex="80" layout="column">
+                        
+                        <input type="hidden"   name="id"   ng-model="id">    
+                        <!--Title-->
+                        <div  layout="row">
+                            <md-input-container flex="70">
+                                <label>{{parent.Translate.PRODUCT.TYPE_NAME}}</label>
+                                <input type="text" name="typeTitle"  flex="80" required ng-model="typeTitle">
+                            </md-input-container >
+                        </div>
+
+                        <!--  Dynamic Field  : this directive  connected to $scope.dynamicFields and  sort options object-->
+                        <dynamic-field
+                            fields="dynamicFields"
+                            on-showfields="showFields(event,fieldset)"
+                            on-remove="removeField(item,fieldset)"
+                            on-removefieldset="removeFieldset(fieldset,index)"
+                            sort="dynamicFieldSortableOptions"
+                            searchablecaption=" parent.Translate.PRODUCT.SEARCHABLE "
+                            addfieldcaption=" parent.Translate.PRODUCT.ADD_FIELD "
+                            addfieldplaceholder=" parent.Translate.PRODUCT.CAT_TITLE "
+                            removefieldsetcaption=" parent.Translate.PRODUCT.TYPE_DELETED_FIELDSET "
+                            on-searchable-change="onSearchableChange(item)" > 
+                        </dynamic-field>
+                        
+                        <!--Add FieldSet-->
+                        <md-button  class="md-primary show-field-btn" ng-click="addFieldset($event)" type="button" flex="100" >
+                            <span class="icon pshop-plus ng-scope"></span>
+                            {{parent.Translate.PRODUCT.ADD_FIELDSET}} 
+                        </md-button>
+                        
+                        
+                        
+                    </div>
+                    
+                </md-content>
+            </div>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            
+            <md-button  ng-disabled="isloading || typeForm.$invalid" ng-show="mode=='add'" type="submit" class="md-primary md-primary-dialog">
+                <md-progress-linear ng-show="isloading" md-mode="indeterminate"></md-progress-linear>
+                {{parent.Translate.ADD}}
+            </md-button>
+            <md-button  ng-disabled="isloading || typeForm.$invalid" ng-show="mode=='edit'" type="button" ng-click="deleteType()" class="md-primary md-error-dialog">
+                <md-progress-linear ng-show="isDeleteloading" md-mode="indeterminate"></md-progress-linear>
+                {{parent.Translate.DELETE}}
+            </md-button>
+            <md-button  ng-disabled="isloading || typeForm.$invalid" ng-show="mode=='edit'" type="submit" class="md-primary md-primary-dialog">
+                <md-progress-linear ng-show="isEditloading" md-mode="indeterminate"></md-progress-linear>
+                {{parent.Translate.EDIT}}
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

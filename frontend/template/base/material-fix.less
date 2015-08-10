@@ -1,33 +1,94 @@
-
-
 /* Angular Material Fix */
-md-input-container .md-placeholder, md-input-container label:not(.md-no-float)
-{
-      transform-origin: 98% 60%;
-      transform-style: preserve-3d;
+
+
+/*Select and Input*/
+
+md-input-container .md-placeholder,
+md-input-container label:not(.md-no-float) {
+    transform-origin: 98% 60%;
+    transform-style: preserve-3d;
 }
-md-select
-{
-    margin-top:0px;
-}
-button.md-button
-{
-    .icon{
-          font-size: 16px;
-          vertical-align: middle;
+md-select {
+    margin-top: 0px;
+    padding: 3px;
+    .md-select-label {
+        width: 100%;
     }
-    
 }
-md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder
-{
-    color:rgba(0,0,0,0.50);
+button.md-button {
+    .icon {
+        font-size: 16px;
+        vertical-align: middle;
+    }
 }
-.md-select-label
-{
-    span{width:160%;}
+md-input-container.md-default-theme label,
+md-input-container.md-default-theme .md-placeholder {
+    color: rgba(0, 0, 0, 0.50);
 }
-md-input-container [ng-message]
-{
-    color :rgba(0,0,0,0);
+md-input-container [ng-message] {
+    color: rgba(0, 0, 0, 0);
 }
- 
+
+/* progress bar */
+
+md-progress-linear {
+    &.active {
+        display: block
+    }
+    .md-container {}
+    .md-bar {
+        background-color: rgba(255, 255, 255, .8);
+    }
+    .md-bar1,
+    .md-bar2 {
+        animation-duration: 3000ms;
+        -webkit-animation-duration: 3000ms;
+    }
+    &.colored {
+        .md-container {
+            background-color: rgba(red(@color-primary), green(@color-primary), blue(@color-primary), .8) !important;
+        }
+    }
+}
+
+/*  Toast  */
+
+md-toast.md-red-theme {
+    background-color: #e74c3c;
+}
+md-toast.md-green-theme {
+    background-color: #2ecc71;
+}
+
+/*Dialog */
+
+md-dialog {
+    .md-actions {
+        border-top: 1px solid @box-border-color;
+        background-color: #f7f7f7;
+        min-height: 58px;
+    }
+    .md-button.md-primary-dialog {
+        background-color: @dialog-Submit-color;
+        color: #fff;
+        &:hover {
+            background-color: darken(@dialog-Submit-color, 10%);
+        }
+    }
+    .md-button.md-error-dialog {
+        background-color: @color-error;
+        color: #fff;
+        &:hover {
+            background-color: darken(@color-error, 10%);
+        }
+    }
+}
+md-backdrop.md-opaque {
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Switch */
+
+md-switch .md-container {
+    margin-left: 8px;
+}

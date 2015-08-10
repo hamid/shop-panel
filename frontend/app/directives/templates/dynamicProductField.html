@@ -1,0 +1,40 @@
+<div class="fieldset-holder" ng-repeat="fieldset in fields track by $index" layout="row" layout-wrap>
+
+    <div class="fieldset-title" layout-fill flex="100"><span class="text">{{fieldset.title}}</span></div>
+    
+    <div class="dynamic-fields-holder " flex="50" ng-repeat="item in fieldset.fields track by $index" layout="column" layout-align="center start" >
+
+
+        <!---------- Text type ---------->  
+        <div class="dynamic-fields-item" flex="100" layout-fill layout="row" layout-align="start center"  ng-if=" item.structure == 'textbox' " >
+            <md-input-container flex="100" layout-fill >
+                <label>{{item.title}}</label>
+                <input type="text"  flex="100"  form="" ng-model="item.model">
+            </md-input-container >
+        </div>
+
+
+
+        <!---------- select box ---------->
+        <div class="dynamic-fields-item" layout="row"  flex="100"  layout-fill layout-align="start center" ng-if=" item.structure == 'selectbox' ">
+
+            <md-select placeholder="{{item.title}}" flex="50" layout-fill ng-model="item.model">
+                <md-option ng-repeat="opt in item.options" value="{{opt}}">{{opt}}</md-option>
+            </md-select>
+
+        </div>
+        
+        
+        <!---------- check box ---------->
+        <div class="dynamic-fields-item" layout="row"  flex="100"  layout-fill layout-align="start center" ng-if=" item.structure == 'checkbox' ">
+            <md-checkbox ng-model="item.model" ng-true-value="1" ng-false-value="0" flex="50" layout-fill>
+                 {{item.title}}
+             </md-checkbox>
+        </div>
+
+    
+    
+        
+    </div>
+</div>
+<br>

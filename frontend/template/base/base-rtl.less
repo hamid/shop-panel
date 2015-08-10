@@ -1,51 +1,104 @@
-body.rtl
-{
+body.rtl {
     direction: rtl;
-    
-    
     /*  Product Section */
-    .product{
-        .box{
-            border-width        : 0px;
-            border-left-width   : 1px;
-            
-            .search-box{
-                .icon{
-                    left:20px;
+    .product {
+        .box {
+            border-width: 0px;
+            border-left-width: 1px;
+            .search-box {
+                .icon {
+                    left: 8px;
                 }
             }
-            .list{
-                ul{
-                    .icon{float:right;}
+            .list {
+                ul {
+                    .icon {
+                        float: right;
+                    }
                 }
-                
-                .item{
-                    .toolbar{
+                .item {
+                    .toolbar {
                         float: left;
                         transform: translateX(-20px);
                     }
                 }
             }
-            
         }
     }
-    
-/* Angular Material rtl fix */
-.md-select-label .md-select-icon
-{
-    width:100%;
-}
-md-select.md-default-theme .md-select-label.md-placeholder span{
-    width:100%;
-}
-
-
-
-/*animation*/
-.fadeInSide
-{
-    .fadeInRight
-}
-
-    
+    .fieldset-holder {
+        .dynamic-fields-holder {
+            button.maximize {
+                text-align: right;
+            }
+            .dynamic-fields-item {
+                .close {
+                    left: 15px;
+                }
+                .minimize {
+                    left: 45px;
+                }
+            }
+        }
+    }
+    .close-btn {
+        left: 20px;
+    }
+    /*  Dialog */
+    .productDialog {
+        .image-holder {
+            .img-box {
+                .overlayer {
+                    .upload,
+                    .filemanager {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+    /*-------- Material---------- */
+    md-input-container .md-char-counter {
+        bottom: 2px;
+        right: auto;
+        left: 2px;
+        color: @box-border-color;
+        font-size: 10px;
+    }
+    md-toast .md-action {
+        margin-right: 24px;
+        margin-left: 0px;
+    }
+    .md-chips .md-chip,
+    .md-chips .md-chip-input-container {
+        .md-chip-content {
+            float: right;
+        }
+        .md-chip-remove-container {
+            margin-right: 0px;
+        }
+        float:right;
+    }
+    md-checkbox {
+        height: 25px;
+        padding-left: 0px;
+        padding-right: 26px;
+        .md-container {
+            right: 0px;
+            left: auto;
+        }
+    }
+    /*tabs*/
+    md-tabs {
+        direction: ltr;
+    }
+    md-tabs[md-border-bottom] md-tabs-wrapper {
+        direction: rtl;
+    }
+    md-tabs.md-dynamic-height md-tabs-content-wrapper {
+        direction: rtl;
+    }
+    /*animation*/
+    .fadeInSide {
+        .fadeInRight
+    }
 }

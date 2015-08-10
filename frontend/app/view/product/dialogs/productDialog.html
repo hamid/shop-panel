@@ -1,0 +1,209 @@
+<md-dialog flex="60" class="productDialog">
+    <md-toolbar class="md-theme-light">
+        <h2 class="md-toolbar-tools">
+              <span>{{parent.Translate.PRODUCT.ADD_PRODUCT}}</span> 
+        </h2>
+    </md-toolbar>
+    <div ng-click="closeDialog()" class="close-btn icon pshop-close"></div>
+    <form name="productForm"  ng-submit="submitProductForm(productForm)"  novalidate>
+        
+        
+        <md-content class="sticky-container">
+            <div class="dialog-content" layout="row" layout-align="center start" >
+                <md-content class="md-padding" layout="row"   flex="100" layout-fill> 
+                    <!--  Tabs  -->
+                    <md-tabs md-dynamic-height md-border-bottom md-center-tabs md-swipe-content flex="100">
+
+                        <!--------- General Tab --------->
+                        <md-tab label="{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.LABEL}}" >
+                            <md-content class="md-padding" flex="100" layout="row"  layout-wrap>
+
+                                
+                                <md-input-container flex="50" >
+                                    <label>{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.TITLE}}</label>
+                                    <input type="text" name="title"  required ng-model="form.title">
+                                    <div ng-messages="productForm.title.$error" role="alert">
+                                        <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                                    </div>
+                                </md-input-container >
+                                <md-input-container flex="50">
+                                    <label>{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.CODE}}</label>
+                                    <input type="text" name="code"   ng-model="form.code">
+                                    <div ng-messages="productForm.code.$error" role="alert">
+                                        <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                                    </div>
+                                </md-input-container >
+
+                                
+                                
+                                <md-input-container flex="100" >
+                                    <label>{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.DESCRIPTION}}</label>
+                                    <textarea ng-model="form.description" name="description" columns="1" md-maxlength="250"></textarea>
+                                    <div ng-messages="productForm.description.$error" role="alert">
+                                        <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                                    </div>
+                                </md-input-container >
+
+                                
+                                
+                                <md-input-container flex="50" >
+                                    <label>{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.PRICE}}</label>
+                                    <input type="number" name="price"  required ng-model="form.price">
+                                    <div ng-messages="productForm.price.$error" role="alert">
+                                        <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                                    </div>
+                                </md-input-container >
+                                <md-input-container flex="50">
+                                    <label>{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.COUNT}}</label>
+                                    <input type="number" name="count"   ng-model="form.count">
+                                    <div ng-messages="productForm.count.$error" role="alert">
+                                        <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                                    </div>
+                                </md-input-container >
+                                
+                                <md-input-container flex="50" >
+                                    <label>{{parent.Translate.PRODUCT.FORM.GENERAL_TAB.LABEL_INPUT}}</label>
+                                    <input type="text" name="label"   ng-model="form.label">
+                                    <div ng-messages="productForm.label.$error" role="alert">
+                                        <div ng-message="required">{{parent.Translate.INPUT_VALIDATION.REQUIRE}}</div>
+                                    </div>
+                                </md-input-container >
+                                <md-input-container flex="50" ></md-input-container>
+                                
+                                
+                                
+                                <md-input-container flex="30" >
+                                    <md-switch ng-model="form.visibility" aria-label="visibility" ng-true-value="1" ng-false-value="0" class="md-primary">
+                                         {{parent.Translate.PRODUCT.FORM.GENERAL_TAB.VISIBILITY}}
+                                    </md-switch>
+                                </md-input-container >
+                                <md-input-container flex="30" >
+                                    <md-switch ng-model="form.stat" aria-label="stat" ng-true-value="1" ng-false-value="0" class="md-warn">
+                                         {{ (form.stat)?parent.Translate.PRODUCT.FORM.GENERAL_TAB.STAT.AVAILABLE:parent.Translate.PRODUCT.FORM.GENERAL_TAB.STAT.UNAVAILABLE }}
+                                    </md-switch>
+                                </md-input-container >
+                                
+                                <md-input-container flex="30" >
+                                    <md-select flex="33" ng-show="accessList"  placeholder=" {{parent.Translate.PRODUCT.SELECT_ACCESS}} " name="accessList" required ng-model="form.access">
+                                        <md-option ng-value="0"  >{{parent.Translate.PRODUCT.PUBLIC_ACCESS}}</md-option>
+                                        <md-option ng-value="opt.id" ng-repeat="opt in accessList">{{ opt.title }}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                
+                                
+                                
+
+                            </md-content>
+                        </md-tab>
+
+                        
+                        <!--------- Type Tab --------->
+                        <md-tab label="{{parent.Translate.PRODUCT.FORM.TYPE_TAB.LABEL}} {{ typeTitle}} ">
+                            <md-content class="md-padding">
+                                
+                                <dynamic-product-field fields="form.dynamicProductFields" flex="100"> </dynamic-product-field >
+                                
+                            </md-content>
+                        </md-tab>
+                        
+                        
+                        <!--------- Text Editor Tab --------->
+                        <md-tab label="{{parent.Translate.PRODUCT.FORM.TEXT_EDITOR_TAB.LABEL}} ">
+                            <md-content class="md-padding">
+                                
+                                 <ng-quill-editor ng-model="form.extraDescription"
+                                                  toolbar="true"
+                                                  link-tooltip="true"
+                                                  image-tooltip="true"
+                                                  toolbar-entries="font size bold list bullet italic underline strike align color background link image"
+                                                  editor-required="true" 
+                                                  error-class="input-error">
+                                 </ng-quill-editor>
+                                
+                            </md-content>
+                        </md-tab>
+
+                        <!--------- Image Upload  --------->
+                        <md-tab label="{{parent.Translate.PRODUCT.FORM.PICTURE_TAB.LABEL}}">
+                            <md-content class="md-padding">
+                                
+                                
+                                <div class="image-upload-holder"
+                                    ngf-drop
+                                    ng-model="extra.images"
+                                    ngf-drag-over-class="dragover"
+                                    ngf-multiple="true"
+                                    ngf-keep="true"
+                                    ngf-allow-dir="true"
+                                    ngf-accept="'image/*,application/pdf'"
+                                    flex="100" layout="row"  layout-wrap
+                                    as-sortable="imageSortableOptions" 
+                                    >
+
+                                    <div class="img-box as-sortable-item" as-sortable-item   ng-repeat="img in extra.images"  as-sortable-item >
+                                        <a ng-click="" data-as-sortable-item-handle     class="as-sortable-item-handle"  >
+                                            <img class="img" ng-hide="img.editMode" ngf-src="img" ngf-default-src="'/thumb.jpg'" ngf-accept="'image/*'"  >
+                                            <img class="img" ng-show="img.editMode" ng-src="{{img.src}}"  >
+                                            
+                                            <div class="upload-overlayer" ng-hide="img.complete"></div>
+                                            <div class="upload-close pshop-close" ng-click="deleteImg(img)" ></div>
+                                            <div class="progress" ng-hide="img.complete" ><div class="bar"  style="width:{{img.progress}}%"></div></div>
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="img-box add-box" >
+                                        <div class="overlayer">
+                                            
+                                            <md-button class="caption">{{parent.Translate.ADD}}</md-button>
+                                            <md-button class="md-primary upload"
+                                                       ngf-select
+                                                       ng-model="extra.images"
+                                                       ngf-multiple="true"
+                                                       ngf-keep="true"
+                                                       ngf-keep-distinct="true"
+                                                       ngf-capture="'camera'"
+                                                       accept="image/*" type="button"> <span class="icon pshop-upload"></span> {{parent.Translate.PRODUCT.FORM.PICTURE_TAB.UPLOAD}}</md-button>
+                                            <md-button class="md-primary filemanager">
+                                                <md-tooltip md-delay="700" md-direction="bottom">{{parent.Translate.COMING_SOON}} </md-tooltip>
+                                                <span class="icon pshop-menu"></span> {{parent.Translate.PRODUCT.FORM.PICTURE_TAB.FILEMANAGER}}</md-button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+       
+                            </md-content>
+                        </md-tab>
+
+
+
+
+
+
+
+
+                    </md-tabs>
+            
+            
+                </md-content>
+            </div>
+            
+            
+            
+      <!-- Buttons bar-->
+        </md-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button type="button" ng-click="closeDialog()">
+                {{parent.Translate.CLOSE}}
+            </md-button>
+            <md-button ng-disabled="productForm.$invalid" ng-show="mode=='add'" type="submit" class="md-primary md-primary-dialog">
+                <md-progress-linear ng-show="isAddloading" md-mode="indeterminate"></md-progress-linear>
+                {{parent.Translate.ADD}}
+            </md-button>
+            <md-button ng-disabled="productForm.$invalid" ng-show="mode=='edit'" type="submit" class="md-primary md-primary-dialog">
+                <md-progress-linear ng-show="isEditloading" md-mode="indeterminate"></md-progress-linear>
+                {{parent.Translate.EDIT}}
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

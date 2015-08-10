@@ -67,7 +67,65 @@ $app_config = array(
         | template by cloning the base template and change the below key
         |
 	*/
-          'template' => 'base'
+          'template' => 'base',
+                  
+                       
+        /*
+	|--------------------------------------------------------------------------
+	| Application maxSearchableField
+	|--------------------------------------------------------------------------
+	|
+        | maximum count of field that could be searchable in each product type
+        |
+	*/
+          'maxSearchableField' => 5,
+                  
+                  
+                  
+        /*
+	|--------------------------------------------------------------------------
+	| Application Upload Function
+	|--------------------------------------------------------------------------
+	|
+        | this function is called  when the file is uploaded
+        |
+	*/
+        //  [LOCAL CHANGE]   'uploadFunction' => 'return true'
+          'uploadFunction' => function($file)
+            {
+              Core::loadLib('Admin',LIB_DIR.DIRECTORY_SEPARATOR.'Admin');
+              Core::loadLib('fileManager',LIB_DIR.DIRECTORY_SEPARATOR.'Admin');
+              
+              //-> Permission Check
+//                if(!Admin::checkModAccess('__upload', 'upload'))
+//                {
+//                    Core::jsonError('No Permission');
+//                    return array('stat'=>false,'mes'=>'No Permission');
+//                }
+                
+              // Create Product Folder
+              $productFolderId = FileManager::createFolder('Product', '0');
+              if(!$productFolderId)
+                  $productFolderId = FileManager::$existingFolderId;
+              
+              
+              
+              $allow_ext = array('png','jpg','bmp','gif');
+              $file_name = time().FileManager::mkRndStr(5);
+
+              return FileManager::upload($file,$file_name,$productFolderId,$allow_ext,false,Admin::$uname);
+          },
+          
+          /*
+	|--------------------------------------------------------------------------
+	| Application Upload Folder Url 
+	|--------------------------------------------------------------------------
+	|
+        | full url of  uploaded file
+        |
+	*/
+        //  [LOCAL CHANGE]   'UploadFolderUrl' => ''
+          'UploadFolderUrl' => Core::$CDN.'site'.'/'.Core::$Setting->package.'/'
                   
         
 );

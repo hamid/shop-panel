@@ -1,45 +1,116 @@
 {  
     "HEADER" :{
-        "LINK1":"پنل مدیریت",
-        "LINK2":"پنل فروشگاهی",
-        "LINK3":"پنل ایمیل"
+        "LINK1":"پنل مديريت",
+        "LINK2":"پنل فروشگاهي",
+        "LINK3":"پنل ايميل"
     },
     "SIDEBAR":{
         "STATICTIS":"آمار فروش",
         "PRODUCTS":"محصولات",
-        "SETTINGS":"تنظیمات",
+        "SETTINGS":"تنظيمات",
         "LEARN":"آموزش"
     },
     "PRODUCT":{
-        "ADD":"ایجاد",
-        "SET_TYPE":"تعیین نوع",
+        "ADD":"ايجاد",
+        "SET_TYPE":"تعيين نوع",
         "SELECT_TYPE":"انتخاب نوع",
-        "ADD_TYPE":"ایجاد نوع",
+        "ADD_TYPE":"ايجاد نوع",
+        "TYPE_NAME":" عنوان نوع ",
         "NO_TYPE":"بدون  نوع",
-        "SELECT_ACCESS":"سطح دسترسی",
-        "PUBLIC_ACCESS":"نمایش برای همه ",
-        "SHOW":"نمایش",
+        "ADD_FIELD":"ایجاد فیلد",
+        "ADD_FIELDSET":"ایجاد دسته فیلد",
+        "SELECT_ACCESS":"سطح دسترسي",
+        "PUBLIC_ACCESS":"نمايش براي همه ",
+        "SHOW":"نمايش",
         "CAT_TITLE": " عنوان دسته ",
-        "ADD_CAT":"ایجاد دسته",
-        "CAT_EMPTY_MESSAGE":"دسته ای وجود ندارد ",
-        "PRODUCT_EMPTY_MESSAGE":"محصولی  وجود ندارد ",
-        "ADD_PRODUCT":"ایجاد محصول",
-        "PRODUCT_EMPTY_MESSAGE":"محصولی ای وجود ندارید ",
-        "CAN_NOT_DROP_PRODUCT":" محصول مورد نظر در این دسته قرار نمی گیرد ",
-        "ADD_TYPE_TIP":"برای ایجاد محصول در دسته مورد نظر باید نوع تعریف شود و در صورت ایجاد زیر دسته باید بدون نوع تعریف شود"
+        "ADD_CAT":"ايجاد دسته",
+        "CAT_EMPTY_MESSAGE":"دسته اي وجود ندارد ",
+        "PRODUCT_EMPTY_MESSAGE":"محصولي  وجود ندارد ",
+        "ADD_PRODUCT":"ايجاد محصول",
+        "PRODUCT_EMPTY_MESSAGE":"محصولي اي وجود نداريد ",
+        "CAN_NOT_DROP_PRODUCT":" محصول مورد نظر در اين دسته قرار نمي گيرد ",
+
+        "CAT_ADDED":"دسته مورد نظر با موفقيت ايجاد شد",
+        "CAT_NOT_ADDED":"خطا در ایجاد دسته",
+
+        "CAT_DELETE_TITLE_DIALOG":"حذف دسته",
+        "CAT_DELETE_QUESTION_DIALOG":"آیا مطمعن به حذف دسته [CAT] هستید ؟",
+        "CAT_DELETED":"دسته [CAT] با موفقيت حذف شد",
+        "CAT_NOT_DELETED":"خطا در حذف دسته",
+        
+        "PRODUCT_DELETE_TITLE_DIALOG":"حذف محصول",
+        "PRODUCT_DELETE_QUESTION_DIALOG":"آیا مطمعن به حذف محصول [PRODUCT] هستید ؟",
+        
+        "CAT_EDITED":"دسته مورد نظر با موفقيت ویرایش شد",
+        "CAT_NOT_EDITED":"خطا در ویرایش دسته",
+
+
+        "ADD_TYPE_TIP":"براي ايجاد محصول در دسته مورد نظر بايد نوع تعريف شود و در صورت ايجاد زير دسته بايد بدون نوع تعريف شود",
+        "DYNAMIC_FIELD_TEXT":" فیلد متنی ",
+        "DYNAMIC_FIELD_CHECKBOX":" فیلد چک باکس ",
+        "DYNAMIC_FIELD_SELECTBOX":" فیلد چند گزینه ای ",
+        "DYNAMIC_FIELD_SELECTBOX_ADD":"   + ایجاد گزینه ",
+        "TYPE_ADDED":"نوع ، باموفقیت ایجاد شد",
+        "TYPE_EDITED":"نوع ، باموفقیت ویرایش شد",
+        "TYPE_NOT_ADDED":"خطا در ایجاد نوع   ",
+        "TYPE_LIST":"لیست نوع ها",
+        "TYPE_WARNING":"اخطار :  [COUNT]  دسته دارای  نوع `[TYPE]` می باشد. آیا مطمعن به حذف این نوع به همراه   دسته ها و محصولات آنها هستید؟",
+        "TYPE_DELETED":"نوع با موفقیت حذف شد",
+        "TYPE_DELETED_ERROR":"خطا در حذف نوع",
+        "TYPE_DELETED_FIELDSET":"   حذف دسته فیلد",
+        "TYPE_SEARCHABLE_MAX_FIELD":"حداکثر [COUNT] فیلد می توانند قابلیت جستجو داشته باشند",
+        "SEARCHABLE":"قابلیت جستجو",
+        
+        
+        "PRODUCT_ADDED" : "محصول با موفقیت ایجاد شد",
+        "PRODUCT_EDITED" : "محصول با موفقیت ویرایش شد",
+        "PRODUCT_DELETED" : "محصول با موفقیت حذف شد",
+        
+        
+        "FORM":{
+            "GENERAL_TAB":{
+                "LABEL":" مشخصات کلی محصولات ",
+                "TITLE":"عنوان محصول",
+                "CODE":"کد محصول",
+                "DESCRIPTION":"توضیحات محصول",
+                "VISIBILITY":"نمایش در سایت",
+                "STAT":{
+                    "AVAILABLE":"موجود",
+                    "UNAVAILABLE":"نا موجود"
+                },
+                "LABEL_INPUT":"برچسب",
+                "PRICE":"قیمت (ریال)",
+                "COUNT":"تعداد"
+            },
+            "TYPE_TAB":{
+                "LABEL":" مشخصات "
+            },
+            "TEXT_EDITOR_TAB":{
+                "LABEL":" توضیحات "
+            },
+            "PICTURE_TAB":{
+                "LABEL":" تصاویر ",
+                "UPLOAD":"آپلود",
+                "FILEMANAGER":"مدیریت فایل"
+            }
+        }
+        
         
     },
     
-    "SAVE":"ذخیره",
-    "ADD":"ایجاد",
+    "SAVE":"ذخيره",
+    "ADD":"ايجاد",
     "DELETE":"حذف",
-    "EDIT":"ویرایش",
+    "DELETE_ALL":"حذف همه",
+    "EDIT":"ويرايش",
     "CLOSE":"بستن",
     "CHOOSE":"انتخاب",
+    "TITLE":"عنوان",
+    "COMING_SOON":"به زودی ...",
     
     
     "INPUT_VALIDATION":{
-        "REQUIRE":"این فیلد ضروری است"
+        "REQUIRE":"اين فيلد ضروري است"
     }
     
     

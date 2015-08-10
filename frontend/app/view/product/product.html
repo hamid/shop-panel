@@ -1,6 +1,5 @@
 <!-- Products Page : contain Tree of all cat s and products --> 
 <div class="product" layout="row" flex>
-    
     <section ng-repeat="box in boxList" class="box" flex="15">
         
 
@@ -11,20 +10,21 @@
             
             <md-button flex="33" class="action-link" ng-click="addCategoryDialog(box,$event)">
                 <span  class="icon pshop-plus"></span>
-                <span  class="caption"> {{Translate.PRODUCT.ADD}} </span>
-                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.ADD}}</md-tooltip>
+                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.ADD_CAT}}</md-tooltip>
             </md-button>
             
-            <md-button flex="33" class="action-link" >
+            <md-button flex="33" class="action-link" ng-click="typeDialog('add',$event,false)" type="button" >
                 <span class="icon pshop-cart f-size-16"></span>
-                <span class="caption"> {{Translate.PRODUCT.SET_TYPE}} </span>
-                <md-tooltip md-delay="800" md-direction="bottom">{{Translate.PRODUCT.SET_TYPE}}</md-tooltip>
+                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.SET_TYPE}}</md-tooltip>
+                
             </md-button>
+            
             
             <md-button flex="33" class="action-link" >
                 <span class="icon pshop-grid f-size-25"></span>
-                <span class="caption"> {{Translate.PRODUCT.SHOW}} </span>
+                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.SHOW}}</md-tooltip>
             </md-button>
+            
             
         </div>
         
@@ -36,15 +36,14 @@
         
         <div class="header" ng-show="box.type=='product'" layout="row" layout-align="space-between right">
             
-            <md-button flex="33" class="action-link" ng-click="addCategoryDialog(box,$event)">
+            <md-button flex="33" class="action-link" ng-click="productDialog(box,'add',$event)">
                 <span  class="icon pshop-plus"></span>
-                <span  class="caption"> {{Translate.PRODUCT.ADD}} </span>
-                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.ADD}}</md-tooltip>
+                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.ADD_PRODUCT}}</md-tooltip>
             </md-button>
             
-            <md-button flex="33" class="action-link" >
+            <md-button flex="33" class="action-link">
                 <span class="icon pshop-grid f-size-25"></span>
-                <span class="caption"> {{Translate.PRODUCT.SHOW}} </span>
+                <md-tooltip md-delay="700" md-direction="bottom">{{Translate.PRODUCT.SHOW}} </md-tooltip>
             </md-button>
             
             
@@ -68,13 +67,13 @@
         <div class="list" ng-show="box.type=='category'" >
             
             <ul as-sortable="CategorySortableOptions" ng-model="box.itemList">
-                <li ng-repeat="item in box.itemList  | filter:query" ng-show="box.itemList" as-sortable-item  class="item as-sortable-item {{(item.selected)?'selected':''}} ">
+                <li ng-repeat="item in box.itemList  | orderBy:'-priority' | filter:query " ng-show="box.itemList" as-sortable-item  class="item as-sortable-item {{(item.selected)?'selected':''}} {{ item.class }}" >
                     <a ng-click="itemClick(box,item)"  data-as-sortable-item-handle   class="as-sortable-item-handle"  href="">
                         <span class="icon {{(item.type_id!=0)?  (item.selected)?'pshop-folder-open':'pshop-folder2' :(item.selected)?'pshop-folder-open-o':'pshop-folder-o'}}   "></span>
-                        <span class="caption">{{item.title}}  </span>
+                        <span class="caption">{{item.title}}</span>
                         <div  class="toolbar"> 
-                            <span ng-click="delete(box,item)" class="pshop-trashcan"></span>
-                            <span class="pshop-write"></span>  
+                            <span ng-click="deleteCategoryDialog(box,item,$event)" class="pshop-trashcan"></span>
+                            <span ng-click="editCategoryDialog(box,item,$event)" class="pshop-write"></span>  
                         </div> 
                     </a>
                     <md-progress-linear class="{{item.loadingState}}" md-mode="indeterminate"></md-progress-linear>
@@ -83,10 +82,13 @@
             
         </div>
         
+        
+        
+        
         <!----- [ Message Box of Category] -----> 
         <div ng-hide="(box.itemList==0 && box.type=='category')?0:1"  class="empty-message">
             <p> <span class="icon pshop-info-outline"></span>{{Translate.PRODUCT.CAT_EMPTY_MESSAGE}}</p>
-            <a href=""><span class="icon pshop-plus"></span> {{Translate.PRODUCT.ADD_CAT}}</a>
+            <a ng-click="addCategoryDialog(box,$event)" href=""><span class="icon pshop-plus"></span> {{Translate.PRODUCT.ADD_CAT}}</a>
         </div>
         
         
@@ -102,15 +104,16 @@
         <div class="list product-list" ng-show="box.type=='product'">
             
             <ul as-sortable="ProductSortableOptions" ng-model="box.itemList">
-                <li ng-repeat="item in box.itemList  | filter:query" ng-show="box.itemList" as-sortable-item  class="item as-sortable-item {{(item.selected)?'selected':''}} ">
+                <li ng-repeat="item in box.itemList  | filter:query" ng-show="box.itemList" as-sortable-item  class="item as-sortable-item {{(item.selected)?'selected':''}}  {{ item.class }}">
                     <a ng-click="productClick(box,item)"  data-as-sortable-item-handle   class="as-sortable-item-handle"  href="">
                         <span class="icon pshop-box"></span>
                         <span class="caption">{{item.title}}  </span>
                         <div  class="toolbar"> 
-                            <span ng-click="delete(box,item)" class="pshop-trashcan"></span>
-                            <span class="pshop-write"></span>  
+                            <span ng-click="deleteProduct(box,item,$event)" class="pshop-trashcan"><md-tooltip md-delay="700" md-direction="bottom">{{Translate.DELETE}} </md-tooltip></span>
+                            <span ng-click="editProduct(box,item,$event)" class="pshop-write"><md-tooltip md-delay="700" md-direction="bottom">{{Translate.EDIT}} </md-tooltip></span>  
                         </div> 
                     </a>
+                    <md-progress-linear class="{{item.loadingState}}" md-mode="indeterminate"></md-progress-linear>
                 </li>
             </ul>
             

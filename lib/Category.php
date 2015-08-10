@@ -12,7 +12,7 @@
  */
 
 
-class Category
+class Category extends Base
 {
     
     public     $id;
@@ -22,9 +22,8 @@ class Category
     public     $access;
     
     
-    protected static $driver;
     protected static $table         =   'product_cat';
-    protected static $prucuctTable  =   'product';
+    protected static $productTable  =   'product';
     
     
     
@@ -50,6 +49,30 @@ class Category
 
     
 
+    /**
+   * Category->get()
+   *    get data(fields) of the category
+   * 
+   * @return array of category fields
+  */
+    public function get()
+    {
+        $list = array();
+        if(empty($this->id))
+            return false;
+         
+        $result    = self::$driver->query(" SELECT      * "
+                                        . " FROM        ".self::$table
+                                        . " WHERE       ".self::$appCondition
+                                                . "`id`= '".intval($this->id)."'");
+        if($row  = self::$driver->fetch($result))
+            foreach ($row as $key=>$item)
+                $this->$key = $item;
+        return $row;
+    }
+    
+    
+    
 
   /**
    * Category->getChildren()
@@ -68,7 +91,8 @@ class Category
          
         $result    = self::$driver->query(" SELECT      $fields "
                                         . " FROM        ".self::$table
-                                        . " WHERE       `parent_id`= '".intval($this->id)."'"
+                                        . " WHERE       ".self::$appCondition
+                                                . "`parent_id`= '".intval($this->id)."'"
                                         . " ORDER BY    `priority`; ");
         while($row  = self::$driver->fetch($result))
             $list[] = new Category($row);
@@ -92,8 +116,9 @@ class Category
            $fields = '`'.implode ('`,`', $fields).'`';
          
         $result    = self::$driver->query(" SELECT      $fields "
-                                        . " FROM        ".self::$prucuctTable
-                                        . " WHERE       `cat`= '".intval($this->id)."'"
+                                        . " FROM        ".self::$productTable
+                                        . " WHERE       ".self::$appCondition
+                                                . "`cat`= '".intval($this->id)."'"
                                         . " ORDER BY    `priority`; ");
         while($row  = self::$driver->fetch($result))
             $list[] = new Product($row);
@@ -116,12 +141,12 @@ class Category
         $fields = implode(' , ', array_map(function ($v, $k) { return "`$k`='$v'"; }, $fields, array_keys($fields)));
         return    self::$driver->query(" UPDATE ".self::$table."
                                          SET    $fields 
-                                         WHERE  `id`      =  '".  $this->id   ."';"
+                                         WHERE  ".self::$appCondition."   `id`      =  '".  $this->id   ."';"
                                        );
     }
     
     
-    /**
+  /**
    * Category->save()
    *    save current category into Database
    *                     
@@ -129,11 +154,40 @@ class Category
   */
     public function save()
     {
-        $stat =    self::$driver->query("INSERT INTO `product_cat`( `priority`, `access`, `parent_id`, `title`, `type_id`) "
-                                     . "VALUES ('0','".$this->access."','".$this->parent_id."','".$this->title."','".$this->type_id."')");
+        $priority  = "(SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='".self::$table."')";
+        $stat      =    self::$driver->query("INSERT INTO ".self::$table."( "
+                                                                            . self::$appExtraField
+                                                                            . " `priority`,"
+                                                                            . " `access`,"
+                                                                            . " `parent_id`,"
+                                                                            . " `title`,"
+                                                                            . " `type_id`) "
+                                                                ." VALUES ( "
+                                                                            . self::$appExtraFieldValue
+                                                                            . " ".$priority.","
+                                                                            . "'".$this->access."',"
+                                                                            . "'".intval($this->parent_id)."',"
+                                                                            . "'".$this->title."',"
+                                                                            . "'".intval($this->type_id)."'"
+                                                                        . ")");
         
         if($stat)
             return $this->id = self::$driver->getLastId();
+        return false;
+    }
+    
+  /**
+   * Category->delete()
+   *    delete current category from Database
+   *                     
+   * @return boolean  :state of delete category
+  */
+    public function delete()
+    {
+        $stat      =    self::$driver->query("DELETE FROM ".self::$table." WHERE ".self::$appCondition." `id`='".intval($this->id)."' ");
+        
+        if($stat)
+            return true;
         return false;
     }
     

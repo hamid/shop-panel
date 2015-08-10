@@ -1,12 +1,1 @@
-@font-face {
-  font-family: 'Open Sans';
-  font-weight: normal;
-  font-style: normal;
-  src: url("font/OpenSans-Light.ttf") format("truetype");
-}
-body {
-  font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
+@font-face{font-family:'Open Sans';font-weight:400;font-style:normal;src:url(font/OpenSans-Light.ttf) format("truetype")}body{font-size:16px;font-family:'Open Sans',sans-serif}.typeDialog .type-form{border-left-width:1px;border-left-style:solid}.dynamic-fields-holder .dynamic-fields-item .close{right:15px}

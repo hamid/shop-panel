@@ -15,7 +15,10 @@
         "SET_TYPE":" Set Type",
         "SELECT_TYPE":"Select Type",
         "ADD_TYPE":" Add Type",
+        "TYPE_NAME":"  Type Title",
         "NO_TYPE":"No Type",
+        "ADD_FIELD":"Add Field",
+        "ADD_FIELDSET":" Add FieldSet",
         "SELECT_ACCESS":" Access Level",
         "PUBLIC_ACCESS":"Public",
         "SHOW":"Show",
@@ -24,16 +27,87 @@
         "CAT_EMPTY_MESSAGE":"There is no Category ",
         "PRODUCT_EMPTY_MESSAGE":"There is no Product ",
         "ADD_PRODUCT":" Add Product",
+
+        "CAT_ADDED":"the Category was added successfully",
+        "CAT_NOT_ADDED":"Error In add Category",
+
+        "CAT_DELETE_TITLE_DIALOG":"Delete Category",
+        "CAT_DELETE_QUESTION_DIALOG":"Do you want to delete [CAT] ?",
+        "CAT_DELETED":"[CAT]  was Deleted Successfully.",
+        "CAT_NOT_DELETED":"Error In Delete Category",
+        
+        "CAT_EDITED":"the Category was edited successfully",
+        "CAT_NOT_EDITED":"Error In edit Category",
+        
+        "PRODUCT_DELETE_TITLE_DIALOG":"Delete Product",
+        "PRODUCT_DELETE_QUESTION_DIALOG":"Do you want to delete [PRODUCT] ?",
+
         "PRODUCT_EMPTY_MESSAGE":" There is no Product in this Category ",
-        "CAN_NOT_DROP_PRODUCT":" the Product can not drop in this Category"
+        "CAN_NOT_DROP_PRODUCT":" the Product can not drop in this Category",
+        
+        "ADD_TYPE_TIP":"",
+        "DYNAMIC_FIELD_TEXT":" TextBox Field  ",
+        "DYNAMIC_FIELD_CHECKBOX":" CheckBox Field ",
+        "DYNAMIC_FIELD_SELECTBOX":" SelectBox Field ",
+        "DYNAMIC_FIELD_SELECTBOX_ADD":"  + Add option   ",
+        "TYPE_ADDED":"the Type was added successfully",
+        "TYPE_EDITED":"the Type was edited successfully",
+        "TYPE_NOT_ADDED":"Error In add Type",
+        "TYPE_LIST":"Type List",
+        "TYPE_WARNING":"Warning : [COUNT] categories(category) have [TYPE] type. are you sure to Delete this type with All categories and their products?",
+        "TYPE_DELETED":"The type was successfully deleted.",
+        "TYPE_DELETED_ERROR":"Error In Delete Type",
+        "TYPE_DELETED_FIELDSET":"Delete Fieldset",
+        "TYPE_SEARCHABLE_MAX_FIELD":"maximum count of searchable field is [COUNT].",
+        "SEARCHABLE":" Searchable field",
+        
+        
+        "PRODUCT_ADDED" : " the Product was added successfully",
+        "PRODUCT_EDITED" : "  the Product was edited successfully  ",
+        "PRODUCT_DELETED" : "  the Product was deleted successfully  ",
+        
+        
+        
+        "FORM":{
+            "GENERAL_TAB":{
+                "LABEL":" General Information ",
+                "TITLE":"Product Title",
+                "CODE":"Product Code",
+                "DESCRIPTION":" Description ",
+                "VISIBILITY":" Visibility",
+                "STAT":{
+                    "AVAILABLE":"Available",
+                    "UNAVAILABLE":"UnAvailable"
+                },
+                "LABEL_INPUT":"Tag",
+                "PRICE":"",
+                "COUNT":""
+            },
+            "TYPE_TAB":{
+                "LABEL":" Feature of "
+            },
+            "TEXT_EDITOR_TAB":{
+                "LABEL":" ِDescription "
+            },
+            "PICTURE_TAB":{
+                "LABEL":" Pictures ",
+                "UPLOAD":"Upload",
+                "FILEMANAGER":"File Manager"
+            }
+        }
+        
+        
     },
     
     "SAVE":"Save",
     "ADD":"Add",
     "DELETE":"Delete",
+    "DELETE_ALL":"حذف همه",
     "EDIT":"Edit",
     "CLOSE":"Close",
     "CHOOSE":"Choose",
+    "TITLE":"Title",
+    "COMING_SOON":"Comming soon ...",
     
     
     "INPUT_VALIDATION":{

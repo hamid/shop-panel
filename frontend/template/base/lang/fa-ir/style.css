@@ -1,12 +1,1 @@
-@font-face {
-  font-family: 'Yekan';
-  font-weight: normal;
-  font-style: normal;
-  src: url("font/BYekan.ttf") format("truetype");
-}
-body {
-  font-size: 13px;
-  font-family: 'Yekan', tahoma, arial;
-}
-
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
+@font-face{font-family:Yekan;font-weight:400;font-style:normal;src:url(font/BYekan.ttf) format("truetype")}body{font-size:13px;font-family:Yekan,tahoma,arial}.md-chips .md-chip,.md-chips .md-chip-input-container,button,html,input,select,textarea{font-family:Yekan,tahoma,arial}.typeDialog .type-form{border-right-width:1px;border-right-style:solid}

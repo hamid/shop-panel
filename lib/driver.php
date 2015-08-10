@@ -13,6 +13,7 @@ class DB{
     
     protected   $uname     = "root";
     protected   $pass      = "";  
+    public      $database  = "";  
     public      $mysqli;  
     public      $lastQuery;
     
@@ -31,7 +32,8 @@ class DB{
         }
         
         
-        $this->mysqli = new mysqli("localhost", $uname, $pass, $Database);
+        $this->database = $Database;
+        $this->mysqli   = new mysqli("localhost", $uname, $pass, $Database);
         $this->mysqli->set_charset("utf8");
         
         if ($this->mysqli->connect_errno) {

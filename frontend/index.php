@@ -16,15 +16,16 @@
   <!-- Css of Template -->
   <link rel="stylesheet" href="template/<?php echo($app_config['template']); ?>/style.css">
   <!-- Css of Panel Language -->
-  <link rel="stylesheet" href="template/<?php echo($app_config['template'].'/lang/'.$app_config['language']); ?>/style.css">
+  <link rel="stylesheet" href="template/<?php echo($app_config['template'].'/lang/'.$app_config['language']); ?>/style.css?v1.0">
   
   <!-- Tools -->
   <link  href="bower_components/html5-boilerplate/css/normalize.css" rel="stylesheet">
   <link  href="bower_components/html5-boilerplate/css/main.css"rel="stylesheet">
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   
   <link href="bower_components/ng-sortable/dist/ng-sortable.min.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/quill/dist/quill.base.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/quill/dist/quill.snow.css" rel="stylesheet" type="text/css">
 
   
   
@@ -81,13 +82,18 @@
     
     <!-- Tools -->
     <script src="bower_components/ng-sortable/dist/ng-sortable.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-file-upload/ng-file-upload-shim.min.js" type="text/javascript"></script>
+    <script src="bower_components/angular-file-upload/ng-file-upload-all.min.js" type="text/javascript"></script>
+    <script src="bower_components/quill/dist/quill.min.js" type="text/javascript"></script>
+    <script src="bower_components/ngQuill/src/ng-quill.min.js" type="text/javascript"></script>
  
     <!--App Config-->
     <script type="text/javascript">
         window.appConfig = {
-               language     :"<?php echo($app_config['language']); ?>",
-               direction    :"<?php echo($app_config['direction']); ?>",
-               urlPrefix    :"<?php echo($app_config['url_prefix']); ?>"
+               language             :"<?php echo($app_config['language']); ?>",
+               direction            :"<?php echo($app_config['direction']); ?>",
+               urlPrefix            :"<?php echo($app_config['url_prefix']); ?>",
+               maxSearchableField   :"<?php echo($app_config['maxSearchableField']); ?>",
         };
     </script>
 
@@ -98,10 +104,18 @@
     <!-- Servises : Factory, Service, Provider -->
     <script src="app/services/factory/translate.js"></script>
     <script src="app/services/factory/product.js"></script>
+
+    
+    <!--Directive-->
+    <script src="app/directives/dynamicField.js"></script>
+    <script src="app/directives/dynamicProductField.js"></script>
   
     <!-- Controllers -->
     <script  src="app/controllers/statistics.js"></script>
     <script  src="app/controllers/products.js"></script>
+    <script  src="app/controllers/productDialog/categoryDialog.js"></script>
+    <script  src="app/controllers/productDialog/typeDialog.js"></script>
+    <script  src="app/controllers/productDialog/productDialog.js"></script>
     <script  src="app/controllers/topMenu.js"></script>
     <script  src="app/controllers/sidebar.js"></script>
   

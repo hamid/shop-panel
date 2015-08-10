@@ -3,11 +3,15 @@
 var mainApp     =   angular.module('mainApp', [
     'TranslateService',
     'ProductFactory',
+    'DynamicFieldDirective',
+    'DynamicProductFieldDirective',
     
     'ngRoute',
     'ngMaterial',
+    'ngFileUpload',
     'ngMessages',
-    'ui.sortable'
+    'ui.sortable',
+    'ngQuill',
 ])
 .config(['$routeProvider','$mdThemingProvider',
   function($routeProvider,$mdThemingProvider) {
@@ -30,6 +34,7 @@ var mainApp     =   angular.module('mainApp', [
       
       
    /* ----- Color UI ----- */
+   
     $mdThemingProvider.definePalette('MainColor', {
         '50'  : '21759b',
         '100' : '21759b',
@@ -55,6 +60,59 @@ var mainApp     =   angular.module('mainApp', [
     $mdThemingProvider.theme('default')
                       .primaryPalette('MainColor')
                       .accentPalette('orange');
+    
+    // Second Theme  : red
+    $mdThemingProvider.definePalette('redPalette', {
+        '50'  : 'e74c3c',
+        '100' : 'e74c3c',
+        '200' : 'e74c3c',
+        '300' : 'e74c3c',
+        '400' : 'e74c3c',
+        '500' : 'e74c3c',
+        '600' : 'e74c3c',
+        '700' : 'e74c3c',
+        '800' : 'e74c3c',
+        '900' : 'e74c3c',
+        'A100': 'e74c3c',
+        'A200': 'e74c3c',
+        'A400': 'e74c3c',
+        'A700': 'e74c3c',
+        'A900': '555',
+        'contrastDefaultColor': 'light',    
+        'contrastDarkColors': ['50', '100', 
+         '200', '300'],
+        'contrastLightColors': undefined    // could also specify this if default was 'dark'
+      });
+    $mdThemingProvider.theme('red')
+                      .primaryPalette('redPalette')
+                      .accentPalette('MainColor');
+              
+    
+    // third Theme  : green
+    $mdThemingProvider.definePalette('greenPalette', {
+        '50'  : '2ecc71',
+        '100' : '2ecc71',
+        '200' : '2ecc71',
+        '300' : '2ecc71',
+        '400' : '2ecc71',
+        '500' : '2ecc71',
+        '600' : '2ecc71',
+        '700' : '2ecc71',
+        '800' : '2ecc71',
+        '900' : '2ecc71',
+        'A100': '2ecc71',
+        'A200': '2ecc71',
+        'A400': '2ecc71',
+        'A700': '2ecc71',
+        'A900': '555',
+        'contrastDefaultColor': 'light',    
+        'contrastDarkColors': ['50', '100', 
+         '200', '300'],
+        'contrastLightColors': undefined    // could also specify this if default was 'dark'
+      });
+    $mdThemingProvider.theme('green')
+                      .primaryPalette('greenPalette')
+                      .accentPalette('MainColor');
               
     
 

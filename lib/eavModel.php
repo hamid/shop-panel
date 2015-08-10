@@ -5,6 +5,7 @@ class EAV{
     public  static $DB;
     
     public  static $default_query_count     = 10;
+    public  static $app_config;
     
     
    /**
@@ -196,7 +197,346 @@ class EAV{
         ));
         return ($cat->save())? $cat : false ;
     }
+    
+    
+    /**
+   * EAV::editCategory()
+   *    edit given category 
+   * 
+   * @param int    $id          id of category
+   * @param string $name        name of category
+   * @param int    $type        type id of category
+   * @param int    $categoryid  category id (parent id)
+   * @return boolen stat of result
+   */
+    public static function editCategory($id,$title,$type,$categoryid,$access)
+    {
+        $cat   = new Category(array(
+                    'id'     => intval($id),
+        ));
+        
+        $stat  = $cat->update(array(
+                    'title'     => $title,
+                    'type_id'   => $type,
+                    'access'    => $access,
+                    'parent_id' => $categoryid,
+        ));
+        return ($stat)? true : false ;
+    }
+    
+    
+    /**
+   * EAV::deleteCategory()
+   *    add category 
+   * 
+   * @param string $name        name of category
+   * @param int    $type        type id of category
+   * @param int    $categoryid  category id (parent id)
+   * @return array of result 
+   */
+    public static function deleteCategory($id)
+    {
+        $cat   = new Category(array(
+                    'id'     => $id,
+        ));
+        return $cat->delete();
+    }
 
+    
+    
+    
+   /**
+   * EAV::addProductType()
+   *    add Type 
+   * 
+   * @param string $name        name of category
+   * @param int    $type        type id of category
+   * @param int    $categoryid  category id (parent id)
+   * @return array of result 
+   */
+    public static function addProductType($title,$fields)
+    {
+        $type   = new Type(array(
+                    'title'     => $title
+        ));
+        if($stat = $type->save())
+        {
+            foreach($fields as $fieldset)
+            {
+                $fieldset['id'] = $type->addFieldset($fieldset['title']);
+                foreach($fieldset['field'] as $item)
+                    $type->addField($fieldset['id'],$item['title'],$item['type'],$item['searchable'],$item['option']);
+            }
+           return $type;
+        }
+        return false;
+    }
+    
+    
+   /**
+   * EAV::editProductType()
+   *    edit Type 
+   * 
+   * @param int    $id          id of category
+   * @param string $name        name of category
+   * @param int    $type        type id of category
+   * @param int    $categoryid  category id (parent id)
+   * @return array of result 
+   */
+    public static function editProductType($id,$title,$fieldsets,$deletedfieldsets =array(),$deletedfields = array())
+    {
+        if(empty($id))
+            return false;
+        
+        $type   = new Type(array(
+                    'id'        => $id,
+                    'title'     => $title
+                ));
+        
+       //---Delete Fieldsets
+        if(is_array($deletedfieldsets) && !empty($deletedfieldsets))
+            foreach($deletedfieldsets as $fieldset_id)
+                $stat = $type->deleteFieldset($fieldset_id);
+       //---Delete Fields
+        if(is_array($deletedfields) && !empty($deletedfields))
+            foreach($deletedfields as $field_id)
+                $stat = $type->deleteField($field_id);
+        
+
+            
+                
+       //--- Update Type
+        $stat   = $type->update(array(
+                    'title'     => $type->title
+                ));
+        
+        
+        foreach($fieldsets as $fieldset)
+        {
+            //--Count of searchable field
+            $searchableCount = 0;
+            if(is_array($fieldset['field']))
+                foreach($fieldset['field'] as $field)
+                    if($field['searchable'])
+                        $searchableCount++;
+            if($searchableCount > intval(EAV::$app_config['maxSearchableField']))
+                return false;
+            
+            //--Update FieldSet
+            if(isset($fieldset['id']) && !empty($fieldset['id']))
+                $type->editFieldset($fieldset['id'],array(
+                    'title'=>$fieldset['title']
+                ));
+            else
+                $fieldset['id'] = $type->addFieldset($fieldset['title']);
+
+            
+           //--Update  Fields
+            if(is_array($fieldset['field']))
+                foreach($fieldset['field'] as $field)
+                {
+                    // if the fields has already added and need to EDIT
+                    if(isset($field['id']) && !empty($field['id']))
+                    {
+                        if(empty($field['priority']))
+                            $priority   = $field['id'];
+                        else
+                            $priority   = $field['priority'];
+
+
+                        $stat = $type->editField(
+                                    $field['id'],
+                                    array(
+                                        'title'       =>  $field['title'],
+                                        'searchable'  =>  $field['searchable'],
+                                        'fieldset_id' =>  $field['fieldset_id'],
+                                        'options'     =>  $field['option'],
+                                        'priority'    =>  $priority,
+                                    )     
+                                );
+                    }else // if the field is new and need to ADD
+                    {
+                        $stat = $type->addField($fieldset['id'],$field['title'],$field['type'],$field['searchable'],$field['option']);
+                    }
+                }
+        }// end foreach of fieldset
+            
+        return $stat;
+        
+        
+    }
+    
+    
+   /**
+   * EAV::deleteProductType()
+   *    first check that is there any category or product use it
+   *    and then if force option is true  delete all of categories/ products and type
+   * 
+   * @param string  $id        id of type
+   * @param boolean $force     delete even type is set for category and products
+   * @return array of result   `stat` => stat of action ,`catCount` => count of category
+   */
+    public static function deleteProductType($id,$force = false)
+    {
+        $type   = new Type(array(
+                    'id'     => $id
+        ));
+        
+        
+        if(!$force)
+        {
+            $catCount       =  $type->getCategoryCount();
+            if($catCount > 0)
+            {
+                return array('stat'=>false,'catCount'=>$catCount);
+            }
+        }
+        
+        return $type->delete();
+        
+    }
+    
+    
+   /**
+   * EAV::getProductTypeByid()
+   *    return fields  of product by given id 
+   * 
+   * @param string $id        id of type
+   * @return array of result 
+   */
+    public static function getProductTypeByid($id)
+    {
+        $type   = new Type(array(
+                    'id'     => $id
+        ));
+        return $type->getFieldsets(true);
+    }
+    
+    
+   /**
+   * EAV::addProduct()
+   *    add product 
+   * 
+   * @param string $data        fieds of product
+   * @param int    $catid       product category id
+   * @return array of result 
+   */
+    public static function addProduct($data,$catid)
+    {
+        $product   = new Product(array(
+            'code'             =>$data['code'],
+            'cat'              =>$catid,
+            'access'           =>$data['access'],
+            'priority'         =>$data['priority'],
+
+            'title'            =>$data['title'],
+            'description'      =>$data['description'],
+            'extraDescription' =>$data['extraDescription'],
+
+            'price'            =>$data['price'],
+            'count'            =>$data['count'],
+            'stat'             =>$data['stat'],
+            'visibility'       =>$data['visibility'],
+            'label'            =>$data['label'],
+
+            'mainImages'       =>$data['mainImages']['address'],
+            'images'           =>$data['images'],
+            
+            'typeFields'       =>$data['dynamicProductFields']
+        ));
+        
+        if(count($data['images']) >= 500)
+            return false;
+        
+        return $product->saveAll();
+    }
+    
+    
+   /**
+   * EAV::getProductData()
+   *    get full product data
+   * 
+   * @param string $data        fieds of product
+   * @param int    $catid       product category id
+   * @return array of result 
+   */
+    public static function getProductData($productId,$options = array())
+    {
+        $product   = new Product(array(
+            'id'             =>$productId,
+        ));
+        if($options['baseUrlPath'])
+            $product->baseUrlPath = $options['baseUrlPath']; // Upload folder Base Url
+        return $product->getAll();
+    }
+    
+    
+    /**
+   * EAV::editProduct()
+   *    edits product 
+   * 
+   * @param string $data        fieds of product
+   * @param int    $catid       product category id
+   * @return array of result 
+   */
+    public static function editProduct($id,$data,$catid)
+    {
+        $product   = new Product(array(
+            'id'               =>intval($id),
+            'code'             =>$data['code'],
+            'cat'              =>$catid,
+            'access'           =>$data['access'],
+            'priority'         =>$data['priority'],
+
+            'title'            =>$data['title'],
+            'description'      =>$data['description'],
+            'extraDescription' =>$data['extraDescription'],
+
+            'price'            =>$data['price'],
+            'count'            =>$data['count'],
+            'stat'             =>$data['stat'],
+            'visibility'       =>$data['visibility'],
+            'label'            =>$data['label'],
+
+            'mainImages'       =>$data['mainImages']['address'],
+            'images'           =>$data['images'],
+            
+            'typeFields'       =>$data['dynamicProductFields']
+        ));
+        
+        if(count($data['images']) >= 500)
+            return false;
+            
+        return $product->UpdateAll();
+    }
+    
+    
+    
+     /**
+   * EAV::deleteProduct()
+   *    delete product 
+   * 
+   * @param int $id       id of the product that should be deleted
+   * @return array of result 
+   */
+    public static function deleteProduct($id)
+    {
+        $product   = new Product(array(
+            'id'               =>intval($id)
+        ));
+        return $product->delete();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     

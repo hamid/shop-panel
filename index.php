@@ -68,26 +68,45 @@ eav::setDriver($driver);
 
 /*
 |--------------------------------------------------------------------------
-| Category,Pruduct Class
+| Base,Category,Pruduct,Type Class
 |--------------------------------------------------------------------------
 |
 | contain  methods for fetch, Create, Update and Delete Categories,Pruducts
 |
 */
+require __DIR__.'/lib/Base.php';
 require __DIR__.'/lib/Category.php';
 require __DIR__.'/lib/Product.php';
+require __DIR__.'/lib/Type.php';
+
+Base::$driver                =   $driver;
+Base::$appCondition          =   $db_config['appCondition'];
+Base::$appExtraField         =   $db_config['appExtraField'];
+Base::$appExtraFieldValue    =   $db_config['appExtraFieldValue'];
 
 Category::setOption(
                     array(
-                          'driver'         =>  $driver,
                           'table'          =>  $db_config['tables']['categories'],
-                          'prucuctTable'   =>  $db_config['tables']['products']
+                          'productTable'   =>  $db_config['tables']['products']
                     )
 );
 Product::setOption(
                     array(
-                          'driver'         =>  $driver,
-                          'table'          =>  $db_config['tables']['products']
+                          'table'               =>  $db_config['tables']['products'],
+                          'table_image'         =>  $db_config['tables']['products_image'],
+                          'table_description'   =>  $db_config['tables']['products_description'],
+                          'table_type_fields'   =>  $db_config['tables']['products_type_fields'],
+                          'table_type_structure_fields'   =>  $db_config['tables']['type_fields']
+                    )
+);
+Type::setOption(
+                    array(
+                          'table'               =>  $db_config['tables']['type'],
+                          'table_fields'        =>  $db_config['tables']['type_fields'],
+                          'table_fieldset'      =>  $db_config['tables']['type_fieldset'],
+                          'table_fields_value'  =>  $db_config['tables']['type_fields_value'],
+                          'category_table'      =>  $db_config['tables']['categories'],
+                          'product_table'       =>  $db_config['tables']['products']
                     )
 );
 

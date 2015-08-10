@@ -23,8 +23,31 @@ $db_config = array(
         |
 	*/
               'tables' =>array(
-                    'categories'  =>  'product_cat',
-                    'products'    =>  'product'
-              )
+                    'categories'            =>  'product_cat',
+                    'products'              =>  'product',
+                    'products_description'  =>  'product_description',
+                    'products_image'        =>  'product_image',
+                    'products_type_fields'  =>  'product_type_field_value',
+                    'type'                  =>  'product_type',
+                    'type_fields'           =>  'product_type_field',
+                    'type_fieldset'         =>  'product_type_fieldset',
+                    'type_fields_value'     =>  'product_type_field_value',
+              ),
+    
+    
+        /*
+	|--------------------------------------------------------------------------
+	| Database other Config
+	|--------------------------------------------------------------------------
+        |
+	| if your app has specific condition on each tables , you could set here
+        | appCondition should contain `and`,`or` at its end
+        | appExtraField and appExtraFieldValue  should contain `,` at end 
+        |
+	*/
+              //  [LOCAL CHANGE]   'appCondition' => ''
+              'appCondition'        => ' `site_id`="'.Core::$SITE_ID.'" AND ',
+              'appExtraField'       => ' `site_id` , ',
+              'appExtraFieldValue'  => Core::$SITE_ID.' , ',
 );
 

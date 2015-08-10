@@ -1,25 +1,17 @@
 {
-  "name": "e-shop",
-  "description": "an easy e-shop panel for products",
-  "directory": "lib/",
-  "version": "1.0.0",
-  "homepage": "https://github.com/xsxhamid/",
-  "license": "MIT",
-  "dependencies": {
-    "angular": "1.2.x",
-    "angular-route": "1.2.x",
-    "angular-loader": "1.2.x",
-    "angular-mocks": "~1.2.x",
-    "bootstrap": "~3.1.1",
-    "html5-boilerplate": "~4.3.0",
-    "angular-tooltips": "~0.1.9"
-  },
-  "authors": [
-    "Hamid Reza Salimian <xsx.hamid@gmail.com>"
-  ],
-  "main": "lib",
-  "keywords": [
-    "shop",
-    "panel"
-  ]
+    "name": "e-shop",
+    "description": "an easy e-shop panel for products",
+    "directory": "lib/",
+    "version": "1.0.0",
+    "homepage": "https://github.com/xsxhamid/",
+    "license": "MIT",
+
+    "authors": [
+        "Hamid Reza Salimian <xsx.hamid@gmail.com>"
+    ],
+    "main": "lib",
+    "keywords": [
+        "shop",
+        "panel"
+    ]
 }

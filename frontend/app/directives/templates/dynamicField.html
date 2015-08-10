@@ -1,0 +1,98 @@
+<div class="fieldset-holder" ng-repeat="fieldset in fields track by $index">
+
+    <div class="fieldset-title"><input placeholder="{{addfieldplaceholder}}" required class="title" ng-model="fieldset.title"  /> <div>
+            <div class="fieldset-delete icon pshop-close"  ng-click="removefieldset({'fieldset':fieldset})">
+                <md-tooltip md-direction="top">
+                {{removefieldsetcaption}} {{fieldset.title}}
+              </md-tooltip>
+            </div>
+    
+<div class="field-wrapper"   as-sortable="dynamicFieldSortableOptions" ng-model="fieldset.field" >
+    
+    <div class="dynamic-fields-holder " ng-repeat="item in fieldset.field track by item.num" layout="column" as-sortable-item >
+        
+
+        <!--Field Show/Hide Detail-->
+        <md-button flex="100" data-as-sortable-item-handle ng-hide="item.open" ng-click="item.open = !item.open" type="button" class="md-primary maximize as-sortable-item-handle"> <span  class="icon {{item.icon}}"><md-tooltip md-direction="right">{{item.fieldTypeCaption}}</md-tooltip> </span> {{item['model']['title']}}</md-button>
+
+
+
+        <div class="field-detail" ng-show="item.open">
+
+        <!---------- Text type ---------->  
+        <div class="dynamic-fields-item" layout="row" layout-align="start center" ng-if=" item.type == 'textbox' " >
+            <md-input-container flex="55" layout-fill >
+                <label>{{item.title}}</label>
+                <input type="text"  flex="66" required ng-model="item['model']['title']">
+            </md-input-container >
+            <md-checkbox ng-model="item['model']['searchable']" ng-true-value="1" ng-false-value="0" ng-change="onsearchablechange({item:item['model']})">
+                 {{searchablecaption}} 
+             </md-checkbox>
+            <div class="action close pshop-close" ng-click="remove({item:item,fieldset:fieldset})"></div>
+            <div class="action minimize pshop-expand_more" ng-click="item.open = !item.open"></div>
+        </div>
+
+
+
+        <!---------- select box ---------->
+        <div class="dynamic-fields-item" layout="column"   layout-align="start start" ng-if=" item.type == 'selectbox' ">
+
+            <div layout="row" layout-fill  layout-align="start center">
+                <md-input-container  flex="55"  >
+                    <label>{{item.title}}</label>
+                    <input type="text"  layout-fill required ng-model="item['model']['title']">
+                </md-input-container >
+                <md-checkbox ng-model="item['model']['searchable']" ng-true-value="1" ng-false-value="0" ng-change="onsearchablechange({item:item['model']})">
+                {{searchablecaption}} 
+                </md-checkbox>
+            </div>
+
+            <div layout="row" layout-fill>
+                <md-chips flex="90"
+                    ng-model="item['model']['option']"
+                    readonly="0"
+                    required
+                    placeholder="{{item.placeholder}}"
+                    delete-button-label="Remove Tag"
+                    delete-hint="Press delete to remove tag"
+                    secondary-placeholder="{{item.placeholder2}}">  
+                </md-chips>
+                <md-divider > </md-divider>
+            </div>
+
+            <div class="action close pshop-close" ng-click="remove({item:item,fieldset:fieldset})"></div>
+            <div class="action minimize pshop-expand_more" ng-click="item.open = !item.open"></div>
+        </div>
+        
+        
+        <!---------- Check Box type ---------->  
+        <div class="dynamic-fields-item" layout="row" layout-align="start center" ng-if=" item.type == 'checkbox' " >
+            <md-input-container flex="55" layout-fill >
+                <label>{{item.title}}</label>
+                <input type="text"  flex="66" required ng-model="item['model']['title']">
+            </md-input-container >
+            <md-checkbox ng-model="item['model']['searchable']" ng-true-value="1" ng-false-value="0" ng-change="onsearchablechange({item:item['model']})">
+                 {{searchablecaption}} 
+             </md-checkbox>
+            <div class="action close pshop-close" ng-click="remove({item:item,fieldset:fieldset})"></div>
+            <div class="action minimize pshop-expand_more" ng-click="item.open = !item.open"></div>
+        </div>
+
+
+
+        </div>
+    
+    
+        
+    </div>
+    
+    <!--Add Field-->
+    <md-button  class="md-primary show-field-btn" ng-click="showFields( {'event':$event,'fieldset':fieldset} )" flex="100" >
+        <span class="icon pshop-plus ng-scope"></span>
+        {{addfieldcaption}} 
+    </md-button>
+    
+</div>
+
+
+</div>
